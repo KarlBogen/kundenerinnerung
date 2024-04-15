@@ -1,0 +1,11 @@
+
+{if $CUSTOMERS_LASTNAME != ''}{if $CUSTOMERS_GENDER == 'f'}Dear Mrs.{elseif $CUSTOMERS_GENDER == 'm'}Dear Mr.{else}Hello{/if} {$CUSTOMERS_FIRSTNAME} {$CUSTOMERS_LASTNAME}!{/if}
+
+We wanted to inform you that have just received as a new delivery, which could also interests you.
+
+They wanted to get a product with a renewed reminder arrival of the following article:
+
+{$LINK}
+
+Sincerely yours,
+Your Shopteam

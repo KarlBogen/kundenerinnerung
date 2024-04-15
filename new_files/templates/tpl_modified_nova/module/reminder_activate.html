@@ -1,0 +1,9 @@
+{config_load file="$language/extra/customers_remind.conf"}
+<h1>{$smarty.const.CUSTOMERS_REMIND}</h1>
+{if $error_message}<div class="{if $message_class}{$message_class}{else}info{/if}message">{$error_message}</div>{/if}
+{if isset($activated)}
+  <div class="highlightbox cf">
+    <h4>{#customers_remind_activate_head#}</h4>
+    <div>{#customers_remind_activate_info#}</div>
+  </div>
+{/if}

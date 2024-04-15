@@ -1,0 +1,89 @@
+{config_load file="$language/lang_$language.conf" section="create_account"}
+{config_load file="$language/extra/customers_remind.conf"}
+<!DOCTYPE html{$doctype}>
+<html {$html_params}>
+
+	<head>
+		<meta charset="{$charset}" />
+		<title>{$PRODUCTS_NAME}</title>
+		<meta name="robots" content="noindex, nofollow, noodp" />
+		{if $base}<base href="{$base}" />{/if}
+		<link rel="stylesheet" type="text/css" href="{$tpl_path}stylesheet.css" />
+		<link rel="stylesheet" type="text/css" href="{$tpl_path}css/fontawesome-6-custom.css" />
+	</head>
+
+	<body class="popupcontent">
+		<div style="width:100%;max-width:100%">
+
+			{if isset($content_text)}
+				<h1>{$content_heading}</h1>
+				<div class="content_site cf">{$content_text}</div>
+				<div class="content_site cf">
+					<div class="button_right cf">
+						<div class="cssButtonPos4">{$BUTTON_BACK}</div>
+					</div>
+				</div>
+			{else}
+				{if $message_class == 'error' && $error_message}<div class="errormessage">{$error_message}</div>{/if}
+				<h2>{$PRODUCTS_NAME}</h2>
+				<p>{#customers_remind_box_heading#}</p>
+
+				{if isset($SUCCESS_MESSAGE)}
+
+					{if $SUCCESS_MESSAGE == '0'}
+						<div class="box_title">{#customers_remind_box_heading2#}</div>
+						{$FORM_ACTION_REMIND}
+							<input type="hidden" name="mail_input_head1" value='{#customers_remind_box_email_head1#}{$PRODUCTS_NAME}{#customers_remind_box_email_head2#}' />
+							<input type="hidden" name="language_input" value='{$language}' />
+							<div class="field_item_1"><label><span class="field_text">{#customers_remind_box_firstname#} <sup>(optional)</sup></span>{$CUSTOMERS_FIRSTNAME_INPUT}</label></div>
+							<div class="field_item_1"><label><span class="field_text">{#customers_remind_box_lastname#} <sup>(optional)</sup></span>{$CUSTOMERS_LASTNAME_INPUT}</label></div>
+							<div class="field_item_1"><label><span class="field_text">{#customers_remind_box_mail#} <sup>*</sup></span>{$CUSTOMERS_MAIL_INPUT|replace:"type=\"text\"":"type=\"email\""}</label></div>
+							<div class="field_item_1"><label><span class="field_text">{#customers_remind_box_st#} <sup>(optional)</sup></span>{$CUSTOMERS_INPUT_ST}</label></div>
+							{if $VVIMG}
+								<div class="field_item_1 vvcode_img"><label><span class="field_text">{#text_sec_code#}</span>{$VVIMG}</label></div>
+							{/if}
+							{if $INPUT_CODE}
+								<div class="field_item_1 vvcode_sec"><label><span class="field_text">{#text_sec_code#} <sup>*</sup></span>{$INPUT_CODE}</label></div>
+							{/if}
+							{if "SIGN_CONDITIONS_ON_CHECKOUT"|defined}
+								<br />
+								<div>
+									<label for="privacy">{if $PRIVACY_CHECKBOX}{$PRIVACY_CHECKBOX}{/if}<span class="ml_5"><strong>{if $PRIVACY_CHECKBOX}{#text_privacy_accept#}{else}{#text_privacy_notice#}{/if}</strong></span> {$PRIVACY_LINK|replace:'target="_blank"':''}</label>
+								</div>
+							{else}
+								{if $PRIVACY_CHECKBOX}
+									<br />
+									<div>
+										<label for="privacy">{$PRIVACY_CHECKBOX}<span class="ml_5"><strong>{#text_privacy_accept#}</strong></span> {$PRIVACY_LINK|replace:'target="_blank"':''}</label>
+									</div>
+								{/if}
+							{/if}
+							<div class="content_site mt_20 cf">
+								<div class="button_right cf">
+									<div class="cssButtonPos4">{$BUTTON_SUBMIT_REMIND}</div>
+								</div>
+							</div>
+						{$FORM_END_REMIND}
+					{/if}
+
+					{if $SUCCESS_MESSAGE == '1'}
+						<div class="infomessage">{#customers_remind_box_success#}</div>
+						{if $message_class == 'info' && $error_message}<div class="infomessage">{$error_message}</div>{/if}
+					{/if}
+
+					{if $SUCCESS_MESSAGE == '2'}
+						<div class="infomessage">{#customers_remind_added#}</div>
+						{if $message_class == 'info' && $error_message}<div class="infomessage">{$error_message}</div>{/if}
+					{/if}
+
+				{else}
+					<div class="content_site cf">
+						<p class="color_error_message">{#customers_remind_box_guest#}</p>
+					</div>
+				{/if}
+
+			{/if}
+		</div>
+	</body>
+
+</html>

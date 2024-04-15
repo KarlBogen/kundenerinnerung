@@ -1,0 +1,108 @@
+{config_load file="$language/lang_$language.conf" section="create_account"}
+{config_load file="$language/extra/customers_remind.conf"}
+<!DOCTYPE html{$doctype}>
+<html {$html_params}>
+
+	<head>
+		<meta charset="{$charset}" />
+		<title>{$PRODUCTS_NAME}</title>
+		<meta name="robots" content="noindex, nofollow, noodp" />
+		{if $base}<base href="{$base}" />{/if}
+		<link rel="stylesheet" type="text/css" href="{$tpl_path}stylesheet.css" />
+	</head>
+
+	<body class="popupcontent">
+		<div style="width:100%;max-width:100%">
+
+			{if isset($content_text)}
+				<h1>{$content_heading}</h1>
+				<div class="content_site cf">{$content_text}</div>
+				<div class="content_site cf">
+					<div class="button_right cf">
+						<div class="cssButtonPos4">{$BUTTON_BACK}</div>
+					</div>
+				</div>
+			{else}
+				{if $message_class == 'error' && $error_message}<div class="errormessage">{$error_message}</div>{/if}
+				<h2>{$PRODUCTS_NAME}</h2>
+				<p>{#customers_remind_box_heading#}</p>
+
+				{if isset($SUCCESS_MESSAGE)}
+
+					{if $SUCCESS_MESSAGE == '0'}
+						<div class="box_title">{#customers_remind_box_heading2#}</div>
+						{$FORM_ACTION_REMIND}
+							<input type="hidden" name="mail_input_head1" value='{#customers_remind_box_email_head1#}{$PRODUCTS_NAME}{#customers_remind_box_email_head2#}' />
+							<input type="hidden" name="language_input" value='{$language}' />
+							<div class="options_row_selection">
+								<span class="fieldtext">{#customers_remind_box_firstname#} <sup>(optional)</sup></span>
+								<span class="options_row_selection">{$CUSTOMERS_FIRSTNAME_INPUT}</span>
+							</div>
+							<div class="options_row_selection">
+								<span class="fieldtext">{#customers_remind_box_lastname#} <sup>(optional)</sup></span>
+								<span class="options_row_selection">{$CUSTOMERS_LASTNAME_INPUT}</span>
+							</div>
+							<div class="options_row_selection">
+								<span class="fieldtext">{#customers_remind_box_mail#} <sup>*</sup></span>
+								<span class="options_row_selection">{$CUSTOMERS_MAIL_INPUT|replace:"type=\"text\"":"type=\"email\""}</span>
+							</div>
+							<div class="options_row_selection">
+								<span class="fieldtext">{#customers_remind_box_st#}</span>
+								<span class="options_row_selection">{$CUSTOMERS_INPUT_ST}</span>
+							</div>
+							{if $VVIMG}
+								<div class="options_row_selection vvcode_img">
+									<span class="fieldtext">{#text_sec_code#}</span>
+									<span class="options_row_selection">{$VVIMG}</span>
+								</div>
+							{/if}
+							{if $INPUT_CODE}
+								<div class="options_row_selection vvcode_sec">
+									<span class="fieldtext">{#text_sec_code#} <sup>*</sup></span>
+									<span class="options_row_selection">{$INPUT_CODE}</span>
+								</div>
+							{/if}
+							{if "SIGN_CONDITIONS_ON_CHECKOUT"|defined}
+								<br />
+								<div>
+									{if $PRIVACY_CHECKBOX}{$PRIVACY_CHECKBOX}{/if}
+									<label for="privacy"><strong>{if $PRIVACY_CHECKBOX}{#text_privacy_accept#}{else}{#text_privacy_notice#}{/if}</strong> {$PRIVACY_LINK|replace:'target="_blank"':''}</label>
+								</div>
+							{else}
+								{if $PRIVACY_CHECKBOX}
+									<br />
+									<div>
+										{$PRIVACY_CHECKBOX}
+										<label for="privacy"><strong>{#text_privacy_accept#}</strong> {$PRIVACY_LINK|replace:'target="_blank"':''}</label>
+									</div>
+								{/if}
+							{/if}
+							<div class="content_site cf">
+								<div class="button_right cf">
+									<div class="cssButtonPos4">{$BUTTON_SUBMIT_REMIND}</div>
+								</div>
+							</div>
+						{$FORM_END_REMIND}
+					{/if}
+
+					{if $SUCCESS_MESSAGE == '1'}
+						<div class="infomessage">{#customers_remind_box_success#}</div>
+						{if $message_class == 'info' && $error_message}<div class="infomessage">{$error_message}</div>{/if}
+					{/if}
+
+					{if $SUCCESS_MESSAGE == '2'}
+						<div class="infomessage">{#customers_remind_added#}</div>
+						{if $message_class == 'info' && $error_message}<div class="infomessage">{$error_message}</div>{/if}
+					{/if}
+
+				{else}
+					<div class="content_site cf">
+						<p class="messageStackError">{#customers_remind_box_guest#}</p>
+					</div>
+				{/if}
+
+			{/if}
+		</div>
+	</body>
+
+</html>

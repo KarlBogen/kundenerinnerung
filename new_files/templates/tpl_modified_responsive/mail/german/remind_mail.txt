@@ -1,0 +1,11 @@
+
+{if $CUSTOMERS_LASTNAME != ''}{if $CUSTOMERS_GENDER == 'f'}Sehr geehrte Frau{elseif $CUSTOMERS_GENDER == 'm'}Sehr geehrter Herr{else}Hallo{/if}  {$CUSTOMERS_FIRSTNAME} {$CUSTOMERS_LASTNAME}!{/if}
+
+Wir wollten Sie darüber informieren, dass wir soeben eine neue Lieferung bekommen haben, die auch Sie interessen könnte.
+
+Sie wollten eine Produkterinnerung bei einem erneutem Eintreffen des folgenden Artikels haben:
+
+{$LINK}
+
+Mit freundlichen Grüßen,
+Ihr Shopteam
