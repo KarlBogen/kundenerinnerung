@@ -6,19 +6,21 @@
 #### Neuerung:  Der Kunde muss ein Opt-in-Verfahren durchlaufen bevor er Warenverfügbarkeitsnachrichten erhalten kann. Das Verfahren ist analog zum Opt-in-System für Newsletter.
 
 Dieses Systemmodul bietet Ihren Kunden die Möglichkeit, sich eine Erinnerungs-E-Mail schicken zu lassen, sobald ein Artikel wieder auf Lager ist.
+<br>
 Sobald ein Artikel nicht mehr auf Lager ist, erscheint auf der Produktdetail-Seite ein Button, womit der Kunde sich in die Erinnerungsliste eintragen kann.
+<br>
 Ist ein Artikel (in ausreichender Anzahl) wieder auf Lager, bekommt der Kunde automatisch eine Erinnerungsmail mit einem Link, der direkt zum Produkt im Shop führt.
 
 Anmerkung: Der Mailversand wird angestoßen, sobald eine Seite im Shop neu geladen wird.
-  Aus Performance-Gründen werden Erinnerungsmails nur einmal täglich versandt.
-  Wer den Versand sofort testen möchte, muss (z.B. mit phpMyAdmin) in der Datenbanktabelle "simulated_cron_records" nach der Zeile "customers_remind" suchen und das Datum in der Spalte "last_executed" zurücksetzen - anschließend eine Seite im Shop neu laden.
-
-	Soll bei jedem Seitenaufruf die Tabelle "Kundenerinnerung" mit dem "Lagerbestand" abgeglichen werden und der Mailversand gestartet werden,
-	dann die Datei /includes/modules/customers_remind.php mit einem Editor öffnen und in Zeile 19 den Wert ändern in
-  	$sendmail_asap = true;
-
+<br>Aus Performance-Gründen werden Erinnerungsmails nur einmal täglich versandt.
+<br>Wer den Versand sofort testen möchte, muss (z.B. mit phpMyAdmin) in der Datenbanktabelle "simulated_cron_records" nach der Zeile "customers_remind" suchen und das Datum in der Spalte "last_executed" zurücksetzen - anschließend eine Seite im Shop neu laden.
+<br>
+<br>Soll bei jedem Seitenaufruf die Tabelle "Kundenerinnerung" mit dem "Lagerbestand" abgeglichen werden und der Mailversand gestartet werden,
+<br>dann die Datei /includes/modules/customers_remind.php mit einem Editor öffnen und in Zeile 19 den Wert ändern in
+<br>$sendmail_asap = true;
+<br>
 Wenn das Modul installiert und aktiviert ist, wird der Warenkorb-Button überschrieben, sobald der Hauptartikel nicht mehr auf Lager ist.
-Weil der Warenkorb-Button nur überschrieben wird, sind keine Änderungen im Template erforderlich.
+<br>Weil der Warenkorb-Button nur überschrieben wird, sind keine Änderungen im Template erforderlich.
 
 Im Paket enthalten sind Dateien für die Templates
 - tpl_modified_nova
