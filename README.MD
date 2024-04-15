@@ -47,6 +47,8 @@ Im Paket enthalten sind Dateien für die Templates
    Der Schalter "Erinnerung nur für angemeldete Kunden?" steht auf "Nein".
    Wer diesen Dienst nur für angemeldete Kunden erlauben möchte, stellt diesen Schalter auf "Ja".
 
+#### Nicht vergessen - Datenschutzhinweise anpassen!
+
 
 ## Deinstallation
 
