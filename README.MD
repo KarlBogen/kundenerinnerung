@@ -1,5 +1,7 @@
 #	Module Kundenerinnerung mit Opt-in
 
+*Getestet mit den Shopversionen 2.0.7.2 und 3.0.2*
+
 
 ## Beschreibung
 
