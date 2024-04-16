@@ -1,6 +1,8 @@
 UNRELEASED
 
 
+- mail/german/remind_activate_mail.txt Fehler "ü" statt "&uuml;"
+
 
 1.0.0 [15.04.2024]
 
