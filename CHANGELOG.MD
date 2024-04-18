@@ -1,6 +1,14 @@
 UNRELEASED
 
 
+
+
+1.0.1 [18.04.2024]
+
+- neue Einstellmöglichkeiten im Systemmodul
+	-- Button-Bild wählen
+	-- Individueller Button-Text
+	-- Warenkorb-Button anzeigen
 - mail/german/remind_activate_mail.txt Fehler "ü" statt "&uuml;"
 
 

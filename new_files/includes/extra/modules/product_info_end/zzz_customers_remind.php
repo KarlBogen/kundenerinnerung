@@ -35,26 +35,34 @@ if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS 
 		$link_parameters = defined('TPL_POPUP_PRODUCT_LINK_PARAMETERS') ? TPL_POPUP_PRODUCT_LINK_PARAMETERS : POPUP_PRODUCT_LINK_PARAMETERS;
 		$link_class = defined('TPL_POPUP_PRODUCT_LINK_CLASS') ? TPL_POPUP_PRODUCT_LINK_CLASS : POPUP_PRODUCT_LINK_CLASS;
 
-		$remindlink .= '<p class="messageStackError color_error_message">' . CUSTOMERS_REMIND_NOTE . '</p>'."\n";
-		$remindlink .= '<a target="_blank" href="'.xtc_href_link(FILENAME_CUSTOMERS_REMIND, 'products_id='.$product->data['products_id'].$link_parameters, $request_type).'" class="'.$link_class.' '.$class.'" title="'.CUSTOMERS_REMIND.'">'."\n";
-		if (CURRENT_TEMPLATE != 'tpl_modified') {
-			$remindlink .= xtc_image_button('button_continue.gif', CUSTOMERS_REMIND)."\n";
-		} else {
-			$remindlink .= xtc_image_button('remind.gif', CUSTOMERS_REMIND)."\n";
+		$linktitle = '';
+		if (parse_multi_language_value(MODULE_CUSTOMERS_REMIND_BUTTON_TEXT, $_SESSION['language_code']) != '') {
+			$linktitle = parse_multi_language_value(MODULE_CUSTOMERS_REMIND_BUTTON_TEXT, $_SESSION['language_code']);
 		}
+		$linktitle = $linktitle != '' ? $linktitle : CUSTOMERS_REMIND;
+
+		$remindlink .= '<p class="messageStackError color_error_message">' . CUSTOMERS_REMIND_NOTE . '</p>'."\n";
+		$remindlink .= '<a target="_blank" href="'.xtc_href_link(FILENAME_CUSTOMERS_REMIND, 'products_id='.$product->data['products_id'].$link_parameters, $request_type).'" class="'.$link_class.' '.$class.'" title="'.$linktitle.'">'."\n";
+		$remindlink .= xtc_image_button((defined('MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE') ? MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE : 'remind.gif'), $linktitle)."\n";
 		$remindlink .= '</a>'."\n";
 
-			$products_qty = '<input type="hidden" value="1" name="products_qty">';
-
-		$info_smarty->clear_assign('ADD_QTY');
 		$info_smarty->clear_assign('ADD_CART_BUTTON');
 		$info_smarty->clear_assign('ADD_CART_BUTTON_EXPRESS');
 		$info_smarty->clear_assign('ADD_CART_BUTTON_PAYPAL');
 		$info_smarty->clear_assign('PAYPAL_INSTALLMENT');
 		$info_smarty->clear_assign('EASYCREDIT');
 
-		$info_smarty->assign('ADD_QTY', $products_qty . ' ' . $add_pid_to_qty);
-		$info_smarty->assign('ADD_CART_BUTTON', $remindlink);
+		if (defined('MODULE_CUSTOMERS_REMIND_SHOW_ADDTOCART') && MODULE_CUSTOMERS_REMIND_SHOW_ADDTOCART == 'top') {
+			$info_smarty->assign('ADD_CART_BUTTON', xtc_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART) . $remindlink);
+		} elseif (defined('MODULE_CUSTOMERS_REMIND_SHOW_ADDTOCART') && MODULE_CUSTOMERS_REMIND_SHOW_ADDTOCART == 'bottom') {
+			$info_smarty->assign('ADD_CART_BUTTON', $remindlink . '<br>' . xtc_image_submit('button_in_cart.gif', IMAGE_BUTTON_IN_CART));
+		} else {
+			$products_qty = '<input type="hidden" value="1" name="products_qty">';
+			$info_smarty->clear_assign('ADD_QTY');
+			$info_smarty->assign('ADD_QTY', $products_qty . ' ' . $add_pid_to_qty);
+			$info_smarty->assign('ADD_CART_BUTTON', $remindlink);
+		}
+
 	}
 }
 ?>

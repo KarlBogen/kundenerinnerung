@@ -57,6 +57,9 @@ class customers_remind {
 	public function install() {
 		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_STATUS', 'true',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED', 'false',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE', 'button_continue.gif',  '6', '1', 'xtc_cfg_select_option(array(\'button_continue.gif\', \'remind.gif\'), ', now())");
+		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_BUTTON_TEXT', '',  '6', '1', 'xtc_cfg_input_email_language;MODULE_CUSTOMERS_REMIND_BUTTON_TEXT', now())");
+		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_SHOW_ADDTOCART', 'no',  '6', '1', 'xtc_cfg_select_option(array(\'no\', \'top\', \'bottom\'), ', now())");
 
 		xtc_db_query("CREATE TABLE IF NOT EXISTS `customers_remind` (
 			`remind_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -256,6 +259,9 @@ class customers_remind {
 		$key = array(
 			'MODULE_CUSTOMERS_REMIND_STATUS',
 			'MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED',
+			'MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE',
+			'MODULE_CUSTOMERS_REMIND_BUTTON_TEXT',
+			'MODULE_CUSTOMERS_REMIND_SHOW_ADDTOCART',
 		);
 
 		return $key;
