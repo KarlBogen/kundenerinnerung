@@ -1,6 +1,7 @@
 UNRELEASED
 
 
+- deutsche Selbstlaute in E-Mails
 - customers_remind.php wird nach dem Login nicht mehr als "letzte aufgerufen Seite" behandelt - danke fiveBytes
 
 1.0.1 [18.04.2024]
