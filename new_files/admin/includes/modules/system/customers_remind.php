@@ -28,7 +28,7 @@ class customers_remind {
 
 	public function __construct() {
 		$this->code = 'customers_remind';
-		$this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: 1.0.0';
+		$this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: 1.0.2';
 		$this->description = '';
 		$this->description .= '<a class="button btnbox but_red" style="text-align:center;" onclick="return confirmLink(\''. MODULE_CUSTOMERS_REMIND_DELETE_CONFIRM .'\', \'\' ,this);" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=custom') . '">' . MODULE_CUSTOMERS_REMIND_DELETE_BUTTON . '</a><br />';
 		$this->description .= MODULE_CUSTOMERS_REMIND_TEXT_DESCRIPTION;
@@ -183,6 +183,7 @@ class customers_remind {
 		$dirs_and_files[] = $shop_path.DIR_ADMIN.'customers_remind_recipients.php';
 		// includes
 		$dirs_and_files[] = $shop_path.'includes/classes/class.customers_remind.php';
+		$dirs_and_files[] = $shop_path.'includes/extra/application_top/application_top_begin/customers_remind.php';
 		$dirs_and_files[] = $shop_path.'includes/extra/application_top/application_top_end/70_customers_remind.php';
 		$dirs_and_files[] = $shop_path.'includes/extra/database_tables/customers_remind.php';
 		$dirs_and_files[] = $shop_path.'includes/extra/filenames/customers_remind.php';

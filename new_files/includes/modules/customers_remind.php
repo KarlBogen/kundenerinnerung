@@ -58,6 +58,9 @@ function sendremindmails() {
 	                        p.products_model,
 	                        p.products_image
 	                  FROM customers_remind cr
+	                  JOIN ".TABLE_CUSTOMERS_REMIND_RECIPIENTS." crr
+	                        ON crr.mail_status = '1'
+	                        AND crr.customers_email_address = cr.customers_email_address
 	                  JOIN ".TABLE_PRODUCTS." p
 	                        ON p.products_id = cr.products_id
 	                        AND p.products_quantity >= cr.customers_st";

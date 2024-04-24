@@ -1,6 +1,11 @@
 UNRELEASED
 
 
+
+
+1.0.2 [24.04.2024]
+
+- Kundenerinnerung wurde auch ohne Opt-in versandt
 - deutsche Selbstlaute in E-Mails
 - customers_remind.php wird nach dem Login nicht mehr als "letzte aufgerufen Seite" behandelt - danke fiveBytes
 
