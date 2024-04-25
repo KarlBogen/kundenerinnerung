@@ -18,7 +18,7 @@ Anmerkung: Der Mailversand wird angestoßen, sobald eine Seite im Shop neu gelad
 <br>Wer den Versand sofort testen möchte, muss (z.B. mit phpMyAdmin) in der Datenbanktabelle "simulated_cron_records" nach der Zeile "customers_remind" suchen und das Datum in der Spalte "last_executed" zurücksetzen - anschließend eine Seite im Shop neu laden.
 <br>
 <br>Soll bei jedem Seitenaufruf die Tabelle "Kundenerinnerung" mit dem "Lagerbestand" abgeglichen werden und der Mailversand gestartet werden,
-<br>dann die Datei /includes/modules/customers_remind.php mit einem Editor öffnen und in Zeile 19 den Wert ändern in
+<br>dann die Datei /includes/modules/customers_remind.php mit einem Editor öffnen und in Zeile 17 den Wert ändern in
 <br>$sendmail_asap = true;
 <br>
 <br>Wenn das Modul installiert und aktiviert ist, wird der Warenkorb-Button überschrieben, sobald der Hauptartikel nicht mehr auf Lager ist.
