@@ -1,7 +1,7 @@
 UNRELEASED
 
 
-
+- Mailversand nur einmal täglich - Code geändert
 
 1.0.2 [24.04.2024]
 
