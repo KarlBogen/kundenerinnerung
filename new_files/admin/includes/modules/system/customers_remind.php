@@ -28,7 +28,7 @@ class customers_remind {
 
 	public function __construct() {
 		$this->code = 'customers_remind';
-		$this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: 1.0.2';
+		$this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: 1.0.3';
 		$this->description = '';
 		$this->description .= '<a class="button btnbox but_red" style="text-align:center;" onclick="return confirmLink(\''. MODULE_CUSTOMERS_REMIND_DELETE_CONFIRM .'\', \'\' ,this);" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=custom') . '">' . MODULE_CUSTOMERS_REMIND_DELETE_BUTTON . '</a><br />';
 		$this->description .= MODULE_CUSTOMERS_REMIND_TEXT_DESCRIPTION;

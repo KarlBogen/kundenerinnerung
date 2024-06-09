@@ -1,6 +1,12 @@
 UNRELEASED
 
 
+
+
+
+1.0.3 [09.06.2024]
+
+- Wenn der Artikelname das Zeichen "%" enthielt kam es zu einem PHP-Fehler - behoben
 - Mailversand nur einmal täglich - Code geändert
 
 1.0.2 [24.04.2024]
