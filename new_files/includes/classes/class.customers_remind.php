@@ -24,8 +24,13 @@ require_once (DIR_FS_CATALOG.'includes/classes/modified_captcha.php');
 
 
 class customersremind {
-  var $message, $message_class;
 
+  var $message;
+  var $message_class;
+  var $auto;
+  var $remove;
+  var $vlCode;
+  var $mod_captcha;
 
   function __construct() {
     $this->auto = false;
@@ -150,7 +155,7 @@ class customersremind {
 
             if ($check_mail['mail_status'] != '1') {
 
-              if (SEND_EMAILS == 'true') {
+              if (MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN == 'true' && SEND_EMAILS == 'true') {
                 $sql_data_array = array(
                   'mail_key' => $this->vlCode,
                   'mail_status' => '0',
@@ -161,7 +166,19 @@ class customersremind {
                 $this->sendRequestMail($mail);
 	              $this->message = TEXT_EMAIL_EXIST_NO_REMINDER;
 	              $this->message_class = 'info';
-              }
+              } else {
+                $sql_data_array = array(
+                  'mail_status' => '1',
+                  'mail_key' => $this->vlCode,
+                  'date_added' => 'now()',
+                  'ip_date_added' => ip_clearing($_SESSION['tracking']['ip']),
+                  'date_confirmed' => 'now()',
+                  'ip_date_confirmed' => ip_clearing($_SESSION['tracking']['ip'])
+                );
+                xtc_db_perform(TABLE_CUSTOMERS_REMIND_RECIPIENTS, $sql_data_array, 'update', "customers_email_address = '".xtc_db_input($mail)."'");
+                $this->message = TEXT_EMAIL_ACTIVE_REMINDER;
+                $this->message_class = 'info';
+							}
 
             } else {
 							// Email registriert
@@ -202,11 +219,20 @@ class customersremind {
             );
             xtc_db_perform(TABLE_CUSTOMERS_REMIND_RECIPIENTS, $sql_data_array);
 
-            if (SEND_EMAILS == 'true') {
+            if (MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN == 'true' && SEND_EMAILS == 'true') {
               $this->sendRequestMail($mail);
 	            $this->message = TEXT_EMAIL_INPUT_REMINDER;
 	            $this->message_class = 'info';
-            }
+            } else {
+              $sql_data_array = array(
+                'mail_status' => '1',
+                'date_confirmed' => 'now()',
+                'ip_date_confirmed' => ip_clearing($_SESSION['tracking']['ip'])
+              );
+              xtc_db_perform(TABLE_CUSTOMERS_REMIND_RECIPIENTS, $sql_data_array, 'update', "customers_email_address = '".xtc_db_input($mail)."'");
+              $this->message = TEXT_EMAIL_ACTIVE_REMINDER;
+              $this->message_class = 'info';
+						}
           }
         }
 

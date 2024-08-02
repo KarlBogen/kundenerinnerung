@@ -1,6 +1,6 @@
 #	Module Kundenerinnerung mit Opt-in
 
-*Getestet mit den Shopversionen 2.0.7.2 und 3.0.2*
+*Getestet mit den Shopversionen 2.0.7.2, 3.0.2 und 3.1.0*
 
 
 ## Beschreibung
@@ -50,6 +50,14 @@ Im Paket enthalten sind Dateien für die Templates
    Wer diesen Dienst nur für angemeldete Kunden erlauben möchte, stellt diesen Schalter auf "Ja".
 
 #### Nicht vergessen - Datenschutzhinweise anpassen!
+
+
+## Update
+
+1. Im Adminbereich unter "Module->System Module" den Eintrag "Kundenerinnerung bei ausverkauften Artikeln" auswählen.
+
+2. Dann den grünen Button "Update" klicken.
+   *Hinweis: Backup, Deinstallieren, Installieren und Wiederherstellen sind nicht nötig.*
 
 
 ## Deinstallation

@@ -24,12 +24,16 @@ class customers_remind {
     public $description;
     public $enabled;
     public $sort_order;
+    public $_check;
     public $keys;
 
 	public function __construct() {
 		$this->code = 'customers_remind';
-		$this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: 1.0.3';
+		$this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: 1.0.4';
 		$this->description = '';
+		if (defined('MODULE_CUSTOMERS_REMIND_STATUS')) {
+			$this->description .= '<a class="button btnbox but_green" style="text-align:center;" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=update') . '">Update</a><br /><br />';
+		}
 		$this->description .= '<a class="button btnbox but_red" style="text-align:center;" onclick="return confirmLink(\''. MODULE_CUSTOMERS_REMIND_DELETE_CONFIRM .'\', \'\' ,this);" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=custom') . '">' . MODULE_CUSTOMERS_REMIND_DELETE_BUTTON . '</a><br />';
 		$this->description .= MODULE_CUSTOMERS_REMIND_TEXT_DESCRIPTION;
 		$this->sort_order = defined('MODULE_CUSTOMERS_REMIND_SORT_ORDER') ? MODULE_CUSTOMERS_REMIND_SORT_ORDER : 0;
@@ -45,18 +49,25 @@ class customers_remind {
 	}
 
 	public function check() {
-		if (!isset($this->_check)) {
-			$check_query = xtc_db_query("SELECT configuration_value
-											FROM " . TABLE_CONFIGURATION . "
-											WHERE configuration_key = 'MODULE_CUSTOMERS_REMIND_STATUS'");
-			$this->_check = xtc_db_num_rows($check_query);
-		}
-		return $this->_check;
+    if (!isset($this->_check)) {
+      if (defined('MODULE_CUSTOMERS_REMIND_STATUS')) {
+        $this->_check = true;
+      } else {
+        $check_query = xtc_db_query("SELECT configuration_value
+                                       FROM " . TABLE_CONFIGURATION . "
+                                      WHERE configuration_key = 'MODULE_CUSTOMERS_REMIND_STATUS'");
+        $this->_check = xtc_db_num_rows($check_query);
+      }
+    }
+    return $this->_check;
 	}
     
 	public function install() {
 		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_STATUS', 'true',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN', 'true',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED', 'false',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED', 'true',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP', 'false',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
 		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE', 'button_continue.gif',  '6', '1', 'xtc_cfg_select_option(array(\'button_continue.gif\', \'remind.gif\'), ', now())");
 		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_BUTTON_TEXT', '',  '6', '1', 'xtc_cfg_input_email_language;MODULE_CUSTOMERS_REMIND_BUTTON_TEXT', now())");
 		xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value,  configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_SHOW_ADDTOCART', 'no',  '6', '1', 'xtc_cfg_select_option(array(\'no\', \'top\', \'bottom\'), ', now())");
@@ -141,6 +152,18 @@ class customers_remind {
 		$file_to_remove = DIR_FS_CATALOG.'includes/extra/modules/product_info_end/customers_remind.php';
 		if (file_exists($file_to_remove)) unlink($file_to_remove);
 
+	}
+
+	public function update() {
+		if (!defined('MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN')) {
+			xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN', 'true','6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+		}
+		if (!defined('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED')) {
+			xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED', 'true','6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+		}
+		if (!defined('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP')) {
+			xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP', 'false','6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+		}
 	}
 
 	public function remove() {
@@ -259,7 +282,10 @@ class customers_remind {
 
 		$key = array(
 			'MODULE_CUSTOMERS_REMIND_STATUS',
+			'MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN',
 			'MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED',
+      'MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED',
+			'MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP',
 			'MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE',
 			'MODULE_CUSTOMERS_REMIND_BUTTON_TEXT',
 			'MODULE_CUSTOMERS_REMIND_SHOW_ADDTOCART',

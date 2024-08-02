@@ -18,8 +18,14 @@ define('MODULE_CUSTOMERS_REMIND_TEXT_TITLE', 'Customer reminder for sold out ite
 define('MODULE_CUSTOMERS_REMIND_TEXT_DESCRIPTION', 'This module offers your logged customers the possibility to have a reminder e-mail sent as soon as an article (in sufficient number) is back in stock.');
 define('MODULE_CUSTOMERS_REMIND_STATUS_TITLE', 'Activate Module?');
 define('MODULE_CUSTOMERS_REMIND_STATUS_DESC', 'Activate Customers Remind');
+define('MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN_TITLE','Double-Opt-In for Customers Remind registration.');
+define('MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN_DESC','If "Yes" an eMail will be send where the Registration have to be confirmed. This only works if send eMails is activated.');
 define('MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED_TITLE', 'Reminder only for registered customers?');
 define('MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED_DESC', 'If you only allow this service for registered customers, then set this switch to “Yes”.');
+define('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED_TITLE', 'Signing privacy notice also for registered customers?');
+define('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED_DESC', 'Should the privacy notice checkbox also be required for registered customers, set this switch to "Yes".<br>(Only applies if Adv. Configuration -> Additional Modules - Sign privacy notice = "Yes"!)');
+define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_TITLE', 'Send email immediately?');
+define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_DESC', 'Compare the "Customer Reminder" table with the "Stock" and then <strong>send the email only once a day</strong>, then switch to "No" (recommended setting).<br>If you want to compare the "Customer Reminder" table with the "Stock" at every page load, set this switch to "Yes".');
 define('MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE_TITLE', 'Which image should be used as a button?');
 define('MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE_DESC', 'With "remind.gif" you can design your own CSS-Button, have a look at the template file "/source/inc/css_button.inc.php".');
 define('MODULE_CUSTOMERS_REMIND_BUTTON_TEXT_TITLE', 'Custom button text');

@@ -4,6 +4,15 @@ UNRELEASED
 
 
 
+1.0.4 [02.08.2024]
+
+- Neue Funktion "Update" hinzugefügt
+- Neue Option "Double-Opt-In für Kundenerinnerung"
+- Neue Option "Unterzeichnen des Datenschutzes auch für angemeldete Kunden?"
+- Neue Option "Mailversand sofort?"
+- Anpassung PHP 8.2
+
+
 1.0.3 [09.06.2024]
 
 - Wenn der Artikelname das Zeichen "%" enthielt kam es zu einem PHP-Fehler - behoben

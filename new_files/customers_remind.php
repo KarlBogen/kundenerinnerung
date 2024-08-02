@@ -105,11 +105,13 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 			if (isset($_POST['action']) && $_POST['action'] == 'add_remind') {
 				$email = xtc_db_prepare_input($_POST['customers_input_email']);
 				// Postcheck
-				if (DISPLAY_PRIVACY_CHECK == 'true' && empty($privacy)) {
-					$error = true;
-					$messageStack->add('customers_remind', ENTRY_PRIVACY_ERROR);
+				if (!isset($_SESSION['customer_email_address']) || (isset($_SESSION['customer_email_address']) && MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED == 'true')) {
+					if (DISPLAY_PRIVACY_CHECK == 'true' && empty($privacy)) {
+						$error = true;
+						$messageStack->add('customers_remind', ENTRY_PRIVACY_ERROR);
+					}
 				}
-			if(strlen($email) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
+				if(strlen($email) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
 					$error = true;
 					$messageStack->add('customers_remind', ENTRY_EMAIL_ADDRESS_ERROR);
 				}
@@ -196,12 +198,14 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 
         $smarty->assign('FORM_END_REMIND', '</form>');
 				if (DISPLAY_PRIVACY_CHECK == 'true') {
-					$smarty->assign('PRIVACY_CHECKBOX', xtc_draw_checkbox_field('privacy', 'privacy', $privacy, 'id="privacy"'));
+					if (!isset($_SESSION['customer_email_address']) || (isset($_SESSION['customer_email_address']) && MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED == 'true')) {
+						$smarty->assign('PRIVACY_CHECKBOX', xtc_draw_checkbox_field('privacy', 'privacy', $privacy, 'id="privacy"'));
+					}
 				}
 				$smarty->assign('PRIVACY_LINK', '<a target="_blank" href="'.xtc_href_link(FILENAME_CUSTOMERS_REMIND, 'coID=2').'" title="Information">'.MORE_INFO.'</a>');
 
-	        $smarty->assign('SUCCESS_MESSAGE', '0');
-	        $smarty->assign('BUTTON_SUBMIT_REMIND', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
+	      $smarty->assign('SUCCESS_MESSAGE', '0');
+	      $smarty->assign('BUTTON_SUBMIT_REMIND', xtc_image_submit('button_continue.gif', IMAGE_BUTTON_CONTINUE));
     	}
 
 			$smarty->assign('error_message', $error_message);

@@ -18,8 +18,14 @@ define('MODULE_CUSTOMERS_REMIND_TEXT_TITLE', 'Kundenerinnerung bei ausverkauften
 define('MODULE_CUSTOMERS_REMIND_TEXT_DESCRIPTION', 'Dieses Modul bietet Ihren angemeldeten Kunden die M&ouml;glichkeit, sich eine Erinnerungs-E-Mail schicken zu lassen, sobald ein Artikel wieder auf Lager ist.<br /><br />Sobald ein Artikel nicht mehr auf Lager ist, erscheint auf der Produktdetail-Seite ein Button, womit der Kunde sich in die Erinnerungsliste eintragen kann.<br /><br />Ist ein Artikel (in ausreichender Anzahl) wieder auf Lager, bekommt der Kunde automatisch eine Erinnerungsmail mit einem Link, der direkt zum Produkt im Shop f&uuml;hrt.');
 define('MODULE_CUSTOMERS_REMIND_STATUS_TITLE', 'Modul aktivieren?');
 define('MODULE_CUSTOMERS_REMIND_STATUS_DESC', 'Kundenerinnerung aktivieren');
+define('MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN_TITLE','Double-Opt-In f&uuml;r Kundenerinnerung');
+define('MODULE_CUSTOMERS_REMIND_DOUBLE_OPT_IN_DESC','Bei "Ja" wird eine E-Mail an den Kunden geschickt, in der die Anmeldung best&auml;tigt werden muss. Es muss hierf&uuml;r in den E-Mail Optionen das Senden von E-Mails aktiviert sein.');
 define('MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED_TITLE', 'Erinnerung nur f&uuml;r angemeldete Kunden?');
 define('MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED_DESC', 'Diesen Dienst nur f&uuml;r angemeldete Kunden erlauben, dann stellen Sie diesen Schalter auf "Ja".');
+define('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED_TITLE', 'Unterzeichnen des Datenschutzes auch f&uuml;r angemeldete Kunden?');
+define('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED_DESC', 'Soll die Datenschutz-Checkbox auch Pflichtangabe f&uuml;r angemeldete Kunden sein, dann stellen Sie diesen Schalter auf "Ja".<br>(Gilt nur wenn Erw. Konfiguration -> Zusatzmodule - Unterzeichnen des Datenschutzes = "Ja"!)');
+define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_TITLE', 'Mailversand sofort?');
+define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_DESC', 'Abgleich der Tabelle "Kundenerinnerung" mit dem "Lagerbestand" und anschlie&szlig;ender <strong>Mailversand nur einmal t&auml;glich</strong>, dann Schalter auf "Nein" (empfohlene Einstellung).<br>Wenn bei jedem Seitenaufruf die Tabelle "Kundenerinnerung" mit dem "Lagerbestand" abgeglichen werden soll, dann stellen Sie diesen Schalter auf "Ja".');
 define('MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE_TITLE', 'Welches Bild soll als Button verwendet werden?');
 define('MODULE_CUSTOMERS_REMIND_BUTTON_IMAGE_DESC', 'Mit "remind.gif" kann, in Verbindung mit der Templatedatei "/source/inc/css_button.inc.php", ein eigener CSS-Button gestaltet werden.');
 define('MODULE_CUSTOMERS_REMIND_BUTTON_TEXT_TITLE', 'Individueller Button-Text');
