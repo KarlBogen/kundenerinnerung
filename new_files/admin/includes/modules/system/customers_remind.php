@@ -168,15 +168,25 @@ class customers_remind {
 
 	public function remove() {
 		xtc_db_query("DELETE FROM " . TABLE_CONFIGURATION . " WHERE configuration_key in ('" . implode("', '", $this->keys()) . "')");
-		xtc_db_query("DROP TABLE `customers_remind`");
-		$check_query = xtc_db_query("SELECT application FROM ".TABLE_SIMULATED_CRON_RECORDS);
-		if (xtc_db_num_rows($check_query) > 1) {
-			xtc_db_query("DELETE FROM " . TABLE_SIMULATED_CRON_RECORDS . " WHERE application = 'customers_remind'");
-		} else {
-			xtc_db_query("DROP TABLE " . TABLE_SIMULATED_CRON_RECORDS);
+		xtc_db_query("DROP TABLE IF EXISTS `customers_remind`");
+		if ($this->table_exists(TABLE_SIMULATED_CRON_RECORDS) === true)	{
+  		$check_query = xtc_db_query("SELECT application FROM ".TABLE_SIMULATED_CRON_RECORDS);
+  		if (xtc_db_num_rows($check_query) > 1) {
+  			xtc_db_query("DELETE FROM " . TABLE_SIMULATED_CRON_RECORDS . " WHERE application = 'customers_remind'");
+  		} else {
+  			xtc_db_query("DROP TABLE " . TABLE_SIMULATED_CRON_RECORDS);
+  		}
+    }
+		$query = xtc_db_query("SHOW COLUMNS FROM " . TABLE_ADMIN_ACCESS . " LIKE 'customers_remind'");
+		$exist = xtc_db_num_rows($query);
+		if ($exist > 0) {
+		  xtc_db_query("ALTER TABLE ".TABLE_ADMIN_ACCESS." DROP `customers_remind`");
 		}
-		xtc_db_query("ALTER TABLE ".TABLE_ADMIN_ACCESS." DROP `customers_remind`");
-		xtc_db_query("ALTER TABLE ".TABLE_ADMIN_ACCESS." DROP `customers_remind_recipients`");
+		$query = xtc_db_query("SHOW COLUMNS FROM " . TABLE_ADMIN_ACCESS . " LIKE 'customers_remind_recipients'");
+		$exist = xtc_db_num_rows($query);
+		if ($exist > 0) {
+		  xtc_db_query("ALTER TABLE ".TABLE_ADMIN_ACCESS." DROP `customers_remind_recipients`");
+		}
 
 		// Klassenerweiterungsmodul wird zeitgleich deinstalliert
 		xtc_db_query("DELETE FROM " . TABLE_CONFIGURATION . " WHERE configuration_key LIKE 'MODULE_PRODUCT_CUSTOMERS_REMIND_%'");
@@ -255,10 +265,15 @@ class customers_remind {
 		// template tpl_modified
 		$dirs_and_files[] = $shop_path.'templates/tpl_modified/buttons/english/remind.gif';
 		$dirs_and_files[] = $shop_path.'templates/tpl_modified/buttons/german/remind.gif';
+		$dirs_and_files[] = $shop_path.'templates/tpl_modified/mail/english/remind_activate_mail.html';
+		$dirs_and_files[] = $shop_path.'templates/tpl_modified/mail/english/remind_activate_mail.txt';
 		$dirs_and_files[] = $shop_path.'templates/tpl_modified/mail/english/remind_mail.html';
 		$dirs_and_files[] = $shop_path.'templates/tpl_modified/mail/english/remind_mail.txt';
+		$dirs_and_files[] = $shop_path.'templates/tpl_modified/mail/german/remind_activate_mail.html';
+		$dirs_and_files[] = $shop_path.'templates/tpl_modified/mail/german/remind_activate_mail.txt';
 		$dirs_and_files[] = $shop_path.'templates/tpl_modified/mail/german/remind_mail.html';
 		$dirs_and_files[] = $shop_path.'templates/tpl_modified/mail/german/remind_mail.txt';
+		$dirs_and_files[] = $shop_path.'templates/tpl_modified/module/reminder_activate.html';
 		$dirs_and_files[] = $shop_path.'templates/tpl_modified/module/reminder.html';
 		// root
 		$dirs_and_files[] = $shop_path.'customers_remind.php';
@@ -270,8 +285,9 @@ class customers_remind {
 			}
 		}
 		// Datei selbst löschen
-        unlink($shop_path.DIR_ADMIN.'includes/modules/system/customers_remind.php');
+    unlink($shop_path.DIR_ADMIN.'includes/modules/system/customers_remind.php');
 		$messageStack->add_session($this->title, 'success');
+    xtc_redirect(xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system'));
 	}
 
 	public function keys() {
@@ -327,6 +343,17 @@ class customers_remind {
 			unlink($dir);
 			return true;
 		}
+	}
+
+	protected function table_exists($table_name)
+	{
+	  $Table = xtc_db_query("show tables like '" . $table_name . "'");
+	  if(xtc_db_num_rows($Table) < 1)
+	  {
+	    return(false);
+	  } else {
+	    return(true);
+	  }
 	}
 
 }
