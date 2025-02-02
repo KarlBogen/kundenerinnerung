@@ -113,5 +113,5 @@ Karl
 
 Ich möchte mich bei<br />
 **Oliver Endres - noRiddle(revilonetz)**<br />
-für die stetige Unterstützung und Hilfe bedanken.
+für die stetige Unterstützung und Hilfe bedanken.<br />
 Besonders bedanken darf ich mich für die intensive Mitwirkung, vor allem für den Abschnitt *"simulateted cron job"*.
