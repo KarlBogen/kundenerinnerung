@@ -15,11 +15,6 @@ Ist ein Artikel (in ausreichender Anzahl) wieder auf Lager, bekommt der Kunde au
 
 Anmerkung: Der Mailversand wird angestoßen, sobald eine Seite im Shop neu geladen wird.
 <br>Aus Performance-Gründen werden Erinnerungsmails nur einmal täglich versandt.
-<br>Wer den Versand sofort testen möchte, muss (z.B. mit phpMyAdmin) in der Datenbanktabelle "simulated_cron_records" nach der Zeile "customers_remind" suchen und das Datum in der Spalte "last_executed" zurücksetzen - anschließend eine Seite im Shop neu laden.
-<br>
-<br>Soll bei jedem Seitenaufruf die Tabelle "Kundenerinnerung" mit dem "Lagerbestand" abgeglichen werden und der Mailversand gestartet werden,
-<br>dann die Datei /includes/modules/customers_remind.php mit einem Editor öffnen und in Zeile 17 den Wert ändern in
-<br>$sendmail_asap = true;
 <br>
 <br>Wenn das Modul installiert und aktiviert ist, wird der Warenkorb-Button überschrieben, sobald der Hauptartikel nicht mehr auf Lager ist.
 <br>Weil der Warenkorb-Button nur überschrieben wird, sind keine Änderungen im Template erforderlich.
@@ -72,6 +67,37 @@ Im Paket enthalten sind Dateien für die Templates
 
 <br /><br />
 
+## Tipps
+
+#### Eigener CSS-Button
+*Gilt nur, wenn im Systemmodul Button-Bild "remind.gif" und als Shoptemplate "tpl_modified_nova" oder "tpl_modified_responsive" gewählt worden ist.*
+
+In der Templatedatei */source/inc/css_button.inc.php* fügen wir z.B. hinter
+
+```php
+    // color 3
+    'button_quick_find' => array(
+      'class' => 'cssButtonColor3',
+    ),
+```
+
+diese Zeilen ein
+
+```php
+    'remind' => array(
+      'class' => 'cssButtonColor3',
+    ),
+```
+
+Um ein Icon zu erhalten fügen wir in der Templatedatei */lang/buttons_german.php* z.B. diese Zeilen ein
+
+```php
+define('CSS_IMAGE_REMIND_ICON_RIGHT', '<i class="fa-regular fa-circle-right"></i>');
+define('CSS_IMAGE_REMIND_ICON_LEFT', '');
+```
+
+<br /><br />
+
 ### Sollten Sie mit einem Problem nicht weiter kommen, finden sich bestimmt Helfer im Modified-Forum
 
 ### [Thema: MODUL: Produkterinnerung für modified eCommerce Shopsoftware](https://www.modified-shop.org/forum/index.php?topic=12813.0)
@@ -79,5 +105,13 @@ Im Paket enthalten sind Dateien für die Templates
 <br /><br />
 
 Viel Spaß!<br />
-Karl<br />
+Karl
+<br /><br /><br />
 
+
+## Würdigungen - Credits
+
+Ich möchte mich bei<br />
+**Oliver Endres - noRiddle(revilonetz)**<br />
+für die stetige Unterstützung und Hilfe bedanken.
+Besonders bedanken darf ich mich für die intensive Mitwirkung, vor allem für den Abschnitt *"simulateted cron job"*.
