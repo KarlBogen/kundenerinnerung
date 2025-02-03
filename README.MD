@@ -114,4 +114,4 @@ Karl
 Ich möchte mich bei<br />
 **noRiddle(revilonetz)**<br />
 für die stetige Unterstützung und Hilfe bedanken.<br />
-Besonders bedanken darf ich mich für die intensive Mitwirkung an diesem Modul, vor allem für den Abschnitt *"simulateted cron job"*.
+Besonders bedanken darf ich mich für die intensive Mitwirkung an diesem Modul, vor allem für den Abschnitt *"simulated cron job"*.
