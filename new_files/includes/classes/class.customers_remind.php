@@ -35,7 +35,7 @@ class customersremind {
   function __construct() {
     $this->auto = false;
     $this->remove = false;
-    
+
     $captcha_class = CAPTCHA_MOD_CLASS;
     $this->mod_captcha = $captcha_class::getInstance();
   }
@@ -115,7 +115,7 @@ class customersremind {
           xtc_db_perform(TABLE_CUSTOMERS_REMIND_RECIPIENTS, $sql_data_array, 'update', "customers_email_address = '".xtc_db_input($check_mail['customers_email_address'])."'");
           $this->sendRequestMail($check_mail['customers_email_address'], 'subscribe');
           $this->message = TEXT_EMAIL_ACTIVE_REMINDER;
-          $this->message_class = 'info';          
+          $this->message_class = 'info';
         }
       } else {
         $this->message = TEXT_EMAIL_NOT_EXIST;
@@ -146,7 +146,7 @@ class customersremind {
 
         if ($check == 'inp') {
           $check_mail_query = xtc_db_query("SELECT customers_email_address,
-                                                   mail_status 
+                                                   mail_status
                                               FROM ".TABLE_CUSTOMERS_REMIND_RECIPIENTS."
                                              WHERE customers_email_address = '".xtc_db_input($mail)."'");
           if (xtc_db_num_rows($check_mail_query) > 0) {
@@ -250,10 +250,10 @@ class customersremind {
 
 
   function sendRequestMail($mail, $action = 'opt_in') {
-    
+
     $sendmail = false;
     $smarty = new Smarty();
-    
+
     $function = 'xtc_href_link';
     if (function_exists('xtc_href_link_from_admin')) {
       $function = 'xtc_href_link_from_admin';
@@ -266,36 +266,36 @@ class customersremind {
       'date_added' => 'now()'
     );
     xtc_db_perform(TABLE_CUSTOMERS_REMIND_RECIPIENTS_HISTORY, $sql_data_array);
-    
+
     switch ($action) {
       case 'opt_in':
         $sendmail = true;
         $link = $function(FILENAME_CUSTOMERS_REMIND, 'action=activate&language='.$_SESSION['language_code'].'&email='.md5($mail).'&key='.$this->vlCode, 'NONSSL', false);
         $smarty->assign('EMAIL', xtc_db_input($mail));
         $smarty->assign('LINK', $link);
-        
+
         //foreach(auto_include(DIR_FS_CATALOG.'includes/extra/newsletter/opt_in/','php') as $file) require_once ($file);
         break;
-      
+
       case 'unsubscribe':
         //foreach(auto_include(DIR_FS_CATALOG.'includes/extra/newsletter/unsubscribe/','php') as $file) require_once ($file);
         break;
-        
+
       case 'subscribe':
-        
+
         //foreach(auto_include(DIR_FS_CATALOG.'includes/extra/newsletter/subscribe/','php') as $file) require_once ($file);
         break;
     }
-    
+
     if ($sendmail === true) {
       $smarty->assign('language', $_SESSION['language']);
       $smarty->assign('tpl_path', HTTP_SERVER.DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/');
       $smarty->assign('logo_path', HTTP_SERVER.DIR_WS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/img/');
-      
+
       $smarty->caching = 0;
       $html_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/remind_activate_mail.html');
       $txt_mail = $smarty->fetch(CURRENT_TEMPLATE.'/mail/'.$_SESSION['language'].'/remind_activate_mail.txt');
-      
+
       xtc_php_mail(EMAIL_SUPPORT_ADDRESS,
                    EMAIL_SUPPORT_NAME,
                    xtc_db_input($mail),

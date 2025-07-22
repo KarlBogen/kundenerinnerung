@@ -2,6 +2,14 @@ UNRELEASED
 
 
 
+1.0.5 [22.07.2025]
+
+- aus der Erinnerungsliste kann direkt eine Erinnerung versandt werden
+- Zusätzlich wird beim Produkt eine Info angezeigt, sobald sich mehrere Kunden in die Erinnerungsliste eingetragen haben
+- Benachrichtigung ab prozentualem Mindestlagerbestand hinzugefügt
+- Mailversand als "geplante Aufgabe" hinzugefügt
+- Hinweis für das "Double Opt In" werden mit CSS-Klasse "errormessage" ausgegeben
+- Frontendtexte "Kundenerinnerung" in "Produkterinnerung" umbenannt
 - im tpl_modified wurden durch das Systemmodul nicht alle Dateien gelöscht
 
 1.0.4 [02.08.2024]

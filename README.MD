@@ -49,10 +49,13 @@ Im Paket enthalten sind Dateien für die Templates
 
 ## Update
 
-1. Im Adminbereich unter "Module->System Module" den Eintrag "Kundenerinnerung bei ausverkauften Artikeln" auswählen.
+1. Dateien aus dem Ordner **new_files/** in den Shop kopieren (vorhandene Dateien überschreiben)
+   <br>*Hinweis: Der Name des Ordners "admin" muss an den des Shops angepasst werden!*
 
-2. Dann den grünen Button "Update" klicken.
-   *Hinweis: Backup, Deinstallieren, Installieren und Wiederherstellen sind nicht nötig.*
+2. Im Adminbereich unter "Module->System Module" den Eintrag "Kundenerinnerung bei ausverkauften Artikeln" auswählen.
+
+3. Dann den grünen Button "Update" klicken (Button wird nur angezeigt, wenn die gespeicherte Modulversion nicht der Aktuellen entspricht).
+   <br>*Hinweis: Backup, Deinstallieren, Installieren und Wiederherstellen sind nicht nötig.*
 
 
 ## Deinstallation

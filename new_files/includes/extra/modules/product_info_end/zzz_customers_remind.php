@@ -15,7 +15,7 @@
 -------------------------------------------------------------- */
 
 if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS == 'true') {
-	// prüft. ob Artikelnummer mit Zeichenkette für Mietartikel endet - wenn ja, dann Button hinzufügen
+	// prüft, ob Bestand kleiner 1 - wenn ja, dann Button hinzufügen
 
 	if ($product->data['products_quantity'] < 1) {
 

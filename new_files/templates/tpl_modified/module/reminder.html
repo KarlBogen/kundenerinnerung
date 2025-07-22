@@ -87,12 +87,12 @@
 
 					{if $SUCCESS_MESSAGE == '1'}
 						<div class="infomessage">{#customers_remind_box_success#}</div>
-						{if $message_class == 'info' && $error_message}<div class="infomessage">{$error_message}</div>{/if}
+						{if $message_class == 'info' && $error_message}<div class="errormessage">{$error_message}</div>{/if}
 					{/if}
 
 					{if $SUCCESS_MESSAGE == '2'}
 						<div class="infomessage">{#customers_remind_added#}</div>
-						{if $message_class == 'info' && $error_message}<div class="infomessage">{$error_message}</div>{/if}
+						{if $message_class == 'info' && $error_message}<div class="errormessage">{$error_message}</div>{/if}
 					{/if}
 
 				{else}

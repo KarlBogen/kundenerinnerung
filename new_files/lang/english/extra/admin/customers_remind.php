@@ -17,3 +17,12 @@
 define('BOX_CUSTOMERS_REMIND', 'Customers Remind');
 define('BOX_CUSTOMERS_REMIND_SUB1', 'Remind list');
 define('BOX_CUSTOMERS_REMIND_SUB2', 'Registered customers');
+
+define('CUSTOMERS_REMIND_STOCK_INFO', 'Current stock: <strong> %s</strong>.<br>');
+define('CUSTOMERS_REMIND_MINSTOCK_INFO', '<strong> %s</strong> customers are registered for <strong>%s</strong> products.<br>If stock is <strong>%s</strong> automatic email sending starts.');
+define('CUSTOMERS_REMIND_START_SENDING', 'Send mails');
+define('CUSTOMERS_REMIND_CONFIRMSEND', 'Are you sure?<br>Do you really want to send the reminders?');
+
+// geplante Aufgaben
+define('TEXT_HEADING_TASKS_SEND_CUSTOMERS_REMIND', 'Customer reminder for sold-out products');
+define('TEXT_INFO_TASKS_SEND_CUSTOMERS_REMIND', 'Send reminder emails to customers!');
