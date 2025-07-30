@@ -29,7 +29,7 @@ class customers_remind {
     public $version;
 
   public function __construct() {
-    $this->version = '1.0.5';
+    $this->version = '1.0.6';
     $this->code = 'customers_remind';
     $this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: ' . $this->version;
     $this->description = '';
@@ -175,6 +175,10 @@ class customers_remind {
     if (!defined('MODULE_CUSTOMERS_REMIND_VERSION')) {
       xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_VERSION', '" . $this->version . "', '6', '1', now())");
     }
+    if (version_compare(MODULE_CUSTOMERS_REMIND_VERSION, $this->version, '<')) {
+      xtc_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value = '" . $this->version . "', last_modified = now() WHERE configuration_key = 'MODULE_CUSTOMERS_REMIND_VERSION'");
+    }
+
     //Eintrag in Tabelle geplante Aufgaben
     $scheduled_tasks_array = array();
     $scheduled_query = xtc_db_query("SELECT *

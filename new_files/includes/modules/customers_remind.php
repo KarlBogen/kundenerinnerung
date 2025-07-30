@@ -52,8 +52,11 @@ function sendremindmails($prodId = '', $mail = '') {
 
     if (MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK_STATUS == 'true' && $prodId == '' && $mail == '')
     {
-      $minstockQuery = "SELECT sum(customers_st) as stock, products_id
-                        FROM customers_remind
+      $minstockQuery = "SELECT sum(cr.customers_st) as stock, cr.products_id as products_id
+                        FROM customers_remind cr
+                        JOIN ".TABLE_CUSTOMERS_REMIND_RECIPIENTS." crr
+                          ON crr.mail_status = '1'
+                          AND crr.customers_email_address = cr.customers_email_address
                         GROUP BY products_id";
 
       $resminstockQuery = xtc_db_query($minstockQuery);

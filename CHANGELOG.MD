@@ -2,6 +2,12 @@ UNRELEASED
 
 
 
+1.0.6 [30.07.2025]
+
+- Fehler in der Berechnung Mindestlagerbestand für geplante Aufgaben - behoben
+- PHP-Warnmeldung bei nicht aktivierten E-Mailadressen - behoben
+- Auto-Update Versionsnummer in der Tabelle "configuration"
+
 1.0.5 [22.07.2025]
 
 - aus der Erinnerungsliste kann direkt eine Erinnerung versandt werden

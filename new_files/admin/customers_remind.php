@@ -148,6 +148,7 @@ require(DIR_WS_INCLUDES . 'head.php');
 
                 foreach ($customers_reminds as $customers_remind) {
                   // Mindestlagerbestand für automatischen Mailversand
+                  if (isset($totals[$customers_remind['products_id']]['STOCK']))
                   $sendstock = round((int)$totals[$customers_remind['products_id']]['STOCK'] * (int)MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK / 100);
 
                   if ((isset($pInfo)) && (is_object($pInfo)) && ($customers_remind['remind_id'] == $pInfo->remind_id)) {
