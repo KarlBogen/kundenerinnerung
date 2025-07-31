@@ -26,7 +26,7 @@ define('TABLE_HEADING_PRODUCT_BILD' , 'Bild');
 define('TABLE_HEADING_PRODUCT_MINSTOCK' , 'Prozentualer<br>Mindestlagerbestand');
 define('TABLE_HEADING_PRODUCT_ST' , 'St&uuml;ck');
 define('TABLE_HEADING_PRODUCT_DAT' , 'Art.Nr. Bearbeiten');
-define('TABLE_HEADING_PRODUCT_CUPO' , 'E-Mail / Gutschein / Rabatt senden<br><br>Hinweis zu prozentualem Mindestlagerbestand');
+define('TABLE_HEADING_PRODUCT_CUPO' , 'E-Mail / Gutschein / Rabatt senden');
 define('TABLE_HEADING_DEL', 'Eintrag l&ouml;schen?');
 define('KD_REG', 'registrierter Kunde [Kundennummer]<br>E-Mail<span class="colorRed"> (n.a. = nicht aktiviert)</span>');
 define('FOOTER_INFO', 'Kunden, die sich f&uuml;r eine Produkterinnerung eingetragen haben<br>bekommen eine automatische E-Mail-Benachrichtigung,<br>sobald der gew&uuml;nschte Artikel wieder auf Lager ist.');

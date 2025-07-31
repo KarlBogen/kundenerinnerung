@@ -175,7 +175,7 @@ class customers_remind {
     if (!defined('MODULE_CUSTOMERS_REMIND_VERSION')) {
       xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_VERSION', '" . $this->version . "', '6', '1', now())");
     }
-    if (version_compare(MODULE_CUSTOMERS_REMIND_VERSION, $this->version, '<')) {
+    elseif (version_compare(MODULE_CUSTOMERS_REMIND_VERSION, $this->version, '<')) {
       xtc_db_query("UPDATE " . TABLE_CONFIGURATION . " SET configuration_value = '" . $this->version . "', last_modified = now() WHERE configuration_key = 'MODULE_CUSTOMERS_REMIND_VERSION'");
     }
 

@@ -26,7 +26,7 @@ define('TABLE_HEADING_PRODUCT_BILD' , 'Image');
 define('TABLE_HEADING_PRODUCT_MINSTOCK' , 'Percentage<br>minimum stock');
 define('TABLE_HEADING_PRODUCT_ST' , 'Pieces');
 define('TABLE_HEADING_PRODUCT_DAT' , 'Products Model Edit');
-define('TABLE_HEADING_PRODUCT_CUPO' , 'E-Mail / Coupon / Discount<br><br>Notification percentage minimum stock level');
+define('TABLE_HEADING_PRODUCT_CUPO' , 'E-Mail / Coupon / Discount');
 define('TABLE_HEADING_DEL', 'Delete Entry?');
 define('KD_REG', 'Registered Customer [Customer No.]<br>Email<span class="colorRed"> (n.a. = not activated)</span>');
 define('FOOTER_INFO', 'Your customers get a reminder mail sent as soon as an article is sufficient back in stock.');
