@@ -307,7 +307,8 @@ class customersremind {
                    REMINDER_REG_MAIL_ADMIN === true ? EMAIL_SUPPORT_NAME : '',
                    STORE_NAME . ' - ' . TEXT_EMAIL_SUBJECT_REMINDER,
                    $html_mail,
-                   $txt_mail
+                   $txt_mail,
+                   2
                    );
     }
   }

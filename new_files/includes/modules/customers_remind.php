@@ -103,7 +103,8 @@ function sendremindmails($prodId = '', $mail = '') {
         '', '', // attachments
         STORE_NAME . ' - ' . $arrstock['mail_head1'], // subject
         $html_mail, // HTML content
-        $txt_mail // text-only content
+        $txt_mail, // text-only content
+        2
       );
     }
   }

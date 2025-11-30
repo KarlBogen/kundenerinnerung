@@ -2,6 +2,8 @@ UNRELEASED
 
 
 
+- Mailversand angepasst an Shopversion 3.1.5 (Variable für Priorität)
+
 1.0.6 [30.07.2025]
 
 - Fehler in der Berechnung Mindestlagerbestand für geplante Aufgaben - behoben
