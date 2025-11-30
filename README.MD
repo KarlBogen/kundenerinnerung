@@ -101,7 +101,7 @@ define('CSS_IMAGE_REMIND_ICON_LEFT', '');
 
 <br /><br />
 
-### Sollten Sie mit einem Problem nicht weiter kommen, finden sich bestimmt Helfer im $\textcolor{magenta}{Mod}$ified-Forum
+### ${Sollten\ Sie\ mit\ einem\ Problem\ nicht\ weiter\ kommen,\ finden\ sich\ bestimmt\ Helfer\ im\ {\color{red}Mod}}ified-Forum$
 
 ### [Thema: MODUL: Produkterinnerung für modified eCommerce Shopsoftware](https://www.modified-shop.org/forum/index.php?topic=12813.0)
 
