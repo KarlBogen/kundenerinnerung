@@ -26,6 +26,8 @@ define('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED_TITLE', 'Signing privac
 define('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED_DESC', 'Should the privacy notice checkbox also be required for registered customers, set this switch to "Yes".<br>(Only applies if Adv. Configuration -> Additional Modules - Sign privacy notice = "Yes"!)');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_TITLE', 'Send email immediately?');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_DESC', 'Compare the "Customer Reminder" table with the "Stock" and then <strong>send the emails according to the settings in <a style="color: #e67e22; font-size: 12px; font-weight: bold;" href="'.((function_exists('xtc_href_link')) ? xtc_href_link(FILENAME_SCHEDULED_TASKS) : '#').'">Tools -> Scheduled Tasks</a> -> Task: "Customer reminder for sold-out products"</strong>, then switch to "No" (recommended setting).<br>If you want to compare the "Customer Reminder" table with the "Stock" at every page load, set this switch to "Yes".');
+define('MODULE_CUSTOMERS_REMIND_SENDMAIL_TITLE', 'Customer remind:');
+define('MODULE_CUSTOMERS_REMIND_SENDMAIL_DESC', 'Send an e-mail to the shop owner (contact - e-mail address) when a customer enters the reminder list?');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK_STATUS_TITLE', 'Send message when minimum stock level is reached.');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK_STATUS_DESC', 'Should the sending of messages be activated when the minimum stock level is reached?');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK_TITLE', 'Send message when minimum stock level is reached <span style="font-weight:normal;">(in percent)</span>.');

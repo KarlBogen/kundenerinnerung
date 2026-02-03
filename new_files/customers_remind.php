@@ -19,6 +19,10 @@
 include ('includes/application_top.php');
 
 if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS == 'true') {
+	// redirect contact form to SSL if available
+	if (ENABLE_SSL == true && $request_type == 'NONSSL' && isset($_GET['view']) && $_GET['view'] == 'nonssl') {
+		xtc_redirect(xtc_href_link(FILENAME_CUSTOMERS_REMIND, 'pID=' . (int) $_GET['pID'] . '&products_id=' . (int) $_GET['products_id'] . '&view=ssl', 'SSL'));
+	}
 
 	// captcha
 	$use_captcha = array('reminder');
@@ -39,6 +43,11 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 	$error_message = '';
 	$reminder = new customersremind();
 
+		// include boxes
+		$display_mode = 'reminder';
+		require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
+		// include header
+		require (DIR_WS_INCLUDES . 'header.php');
 
 	// Accountaktivierung per Emaillink
 	if (isset ($_GET['action']) && ($_GET['action'] == 'activate')) {
@@ -51,12 +60,7 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 		// build breadcrumb
 		$breadcrumb->add(NAVBAR_TITLE_CUSTOMERS_REMIND, xtc_href_link(FILENAME_CUSTOMERS_REMIND, '', 'SSL'));
 
-		// include header
-		require (DIR_WS_INCLUDES . 'header.php');
 
-		// include boxes
-		$display_mode = 'reminder';
-		require (DIR_FS_CATALOG.'templates/'.CURRENT_TEMPLATE.'/source/boxes.php');
 		$smarty->assign('error_message', $error_message);
 		$smarty->assign('message_class', $reminder->message_class);
 	  $smarty->assign('language', $_SESSION['language']);
@@ -103,19 +107,33 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
   	if(MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED == 'false' || (MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED == 'true' && isset($_SESSION['customer_id']))) {
 
 			if (isset($_POST['action']) && $_POST['action'] == 'add_remind') {
-				$email = xtc_db_prepare_input($_POST['customers_input_email']);
+
 				// Postcheck
+				$valid_params = array(
+					'customers_input_firstname',
+					'customers_input_lastname',
+					'customers_input_email',
+					'customers_input_st',
+				);
+
+				// prepare variables
+				foreach ($_POST as $key => $value) {
+					if ((!isset(${$key}) || !is_object(${$key})) && in_array($key , $valid_params)) {
+						${$key} = xtc_db_prepare_input($value);
+					}
+				}
+
 				if (!isset($_SESSION['customer_email_address']) || (isset($_SESSION['customer_email_address']) && MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED == 'true')) {
 					if (DISPLAY_PRIVACY_CHECK == 'true' && empty($privacy)) {
 						$error = true;
 						$messageStack->add('customers_remind', ENTRY_PRIVACY_ERROR);
 					}
 				}
-				if(strlen($email) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
+				if(strlen($customers_input_email) < ENTRY_EMAIL_ADDRESS_MIN_LENGTH) {
 					$error = true;
 					$messageStack->add('customers_remind', ENTRY_EMAIL_ADDRESS_ERROR);
 				}
-				elseif(xtc_validate_email($email) == false) {
+				elseif(xtc_validate_email($customers_input_email) == false) {
 					$error = true;
 					$messageStack->add('customers_remind', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
 				}
@@ -129,9 +147,9 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 					$error = true;
 					$messageStack->add('customers_remind', ENTRY_EMAIL_ADDRESS_CHECK_ERROR);
 				}
-				$_POST['customers_input_st'] = intval($_POST['customers_input_st']);
-				if($_POST['customers_input_st'] < 1) {
-					$_POST['customers_input_st'] = 1;
+				$customers_input_st = intval($customers_input_st);
+				if ($customers_input_st < 1) {
+					$customers_input_st = 1;
 				}
 				// Fehlermeldung anzeigen
 				if($messageStack->size('customers_remind') > 0) {
@@ -144,11 +162,11 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
     	if(isset($_POST['action']) && $_POST['action'] == 'add_remind' && $error === false) {
 
 	      $reminder->auto = true; //Captchaprüfung in PHP Klasse nicht mehr nötig
-		    $reminder->AddUser('inp', '', $email);
+		    $reminder->AddUser('inp', '', $customers_input_email);
 		    $error_message = $reminder->message;
         $message_class = $reminder->message_class;
 
-		    $reg_query = xtc_db_query("SELECT * FROM customers_remind WHERE customers_email_address = '".$email."' AND products_id = ".$products_id);
+		    $reg_query = xtc_db_query("SELECT * FROM customers_remind WHERE customers_email_address = '".$customers_input_email."' AND products_id = ".$products_id);
 		    $registred = xtc_db_fetch_array($reg_query);
 
 	      if(empty($registred)) {
@@ -160,17 +178,56 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 	          'products_model' => $product->data['products_model'],
 	          'products_image' => $product->data['products_image'],
 	          'customers_gender' => (isset($_SESSION['customer_gender']) ? $_SESSION['customer_gender'] : ''),
-	          'customers_firstname' => xtc_db_prepare_input($_POST['customers_input_firstname']),
-	          'customers_lastname' => xtc_db_prepare_input($_POST['customers_input_lastname']),
-	          'customers_email_address' => xtc_db_prepare_input($_POST['customers_input_email']),
+	          'customers_firstname' => $customers_input_firstname,
+	          'customers_lastname' => $customers_input_lastname,
+	          'customers_email_address' => $customers_input_email,
 	          'customers_language' => xtc_db_prepare_input($_POST['language_input']),
-	          'customers_st' => xtc_db_prepare_input($_POST['customers_input_st']),
+	          'customers_st' => $customers_input_st,
 	          'mail_head1' => xtc_db_prepare_input($_POST['mail_input_head1']),
 	          'remind_date_added' => 'now()'
 	        );
 
 	        xtc_db_perform('customers_remind', $sql_data_array);
 	        $smarty->assign('SUCCESS_MESSAGE', '2');
+
+          if (defined('MODULE_CUSTOMERS_REMIND_SENDMAIL') && MODULE_CUSTOMERS_REMIND_SENDMAIL == 'true') {
+
+						$create_html_body = '<h3>' . STORE_NAME . '</h3>';
+						$create_html_body .= '<h4>' . CUSTOMERS_REMIND . '</h4>';
+						$create_html_body .= $customers_input_firstname . "  " . $customers_input_lastname;
+						if (isset($_SESSION['customer_id'])) $create_html_body .= " [" . $_SESSION['customer_id'] . "]";
+						$create_html_body .= "<br>" . CUSTOMERS_REMIND_EMAIL_1 . "<br><br>";
+						$create_html_body .= HEADER_ARTICLE . ": " . $product->data['products_name'] . "<br>";
+						$create_html_body .= HEADER_MODEL . ": " . $product->data['products_model'] . "<br><br>";
+						$create_html_body .= "Link: " . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_PRODUCT_INFO . "?products_id=" . $product->data['products_id'] . "<br><br>";
+
+						$create_text_body = STORE_NAME . "\n\n";
+						$create_text_body .= CUSTOMERS_REMIND . ":\n--------------------\n";
+						$create_text_body .= $customers_input_firstname . "  " . $customers_input_lastname;
+						if (isset($_SESSION['customer_id'])) $create_html_body .= " [" . $_SESSION['customer_id'] . "]";
+						$create_text_body .= "\n" . CUSTOMERS_REMIND_EMAIL_1 . "\n\n";
+						$create_text_body .= HEADER_ARTICLE . ": " . $product->data['products_name'] . "\n";
+						$create_text_body .= HEADER_MODEL . ": " . $product->data['products_model'] . "\n\n";
+						$create_text_body .= "Link: " . HTTP_SERVER . DIR_WS_CATALOG . FILENAME_PRODUCT_INFO . "?products_id=" . $product->data['products_id'] . "\n\n";
+
+						// EMAIL GENERIEREN
+						xtc_php_mail(
+							EMAIL_SUPPORT_ADDRESS, //von emailadresse
+							EMAIL_SUPPORT_NAME, //von emailname
+							CONTACT_US_EMAIL_ADDRESS,  //an emailadresse
+							CONTACT_US_NAME, //an emailname
+							CONTACT_US_FORWARDING_STRING, //bcc
+							'', //antwortadresse
+							'', //antwortname
+							'', //anhang 1
+							'', //antwortname
+							CUSTOMERS_REMIND, //emailbetreff
+							$create_html_body, // htmlnachricht
+							$create_text_body, // textnachricht
+              2
+						);
+					}
+
 	      } else {
 	        $smarty->assign('SUCCESS_MESSAGE', '1');
 	      }
@@ -191,15 +248,15 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 				$mail = isset($_POST['customers_input_email']) ? xtc_db_prepare_input($_POST['customers_input_email']) : (isset($_SESSION['customer_email_address']) ? $_SESSION['customer_email_address'] : '');
 				$st = isset($_POST['customers_input_st']) ? xtc_db_prepare_input($_POST['customers_input_st']) : 1;
 
-				$smarty->assign('CUSTOMERS_FIRSTNAME_INPUT', xtc_draw_input_field('customers_input_firstname', $firstname, 'size="20"'));
-				$smarty->assign('CUSTOMERS_LASTNAME_INPUT', xtc_draw_input_field('customers_input_lastname', $lastname, 'size="20"'));
-				$smarty->assign('CUSTOMERS_MAIL_INPUT', xtc_draw_input_field('customers_input_email', $mail, 'size="20"'));
-				$smarty->assign('CUSTOMERS_INPUT_ST', xtc_draw_input_field('customers_input_st', $st, 'size="20"'));
+				$smarty->assign('CUSTOMERS_FIRSTNAME_INPUT', xtc_draw_input_field('customers_input_firstname', $firstname, 'id="firstname" class="form-control" autocomplete="given-name"'));
+				$smarty->assign('CUSTOMERS_LASTNAME_INPUT', xtc_draw_input_field('customers_input_lastname', $lastname, 'id="lastname" class="form-control" autocomplete="family-name"'));
+				$smarty->assign('CUSTOMERS_MAIL_INPUT', xtc_draw_input_field('customers_input_email', $mail, 'id="email" class="form-control" autocomplete="email"'));
+				$smarty->assign('CUSTOMERS_INPUT_ST', xtc_draw_input_field('customers_input_st', $st, 'id="qty" class="form-control"'));
 
         $smarty->assign('FORM_END_REMIND', '</form>');
 				if (DISPLAY_PRIVACY_CHECK == 'true') {
 					if (!isset($_SESSION['customer_email_address']) || (isset($_SESSION['customer_email_address']) && MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED == 'true')) {
-						$smarty->assign('PRIVACY_CHECKBOX', xtc_draw_checkbox_field('privacy', 'privacy', $privacy, 'id="privacy"'));
+						$smarty->assign('PRIVACY_CHECKBOX', xtc_draw_checkbox_field('privacy', 'privacy', $privacy, 'id="privacy" class="form-check-input"'));
 					}
 				}
 				$smarty->assign('PRIVACY_LINK', '<a target="_blank" href="'.xtc_href_link(FILENAME_CUSTOMERS_REMIND, 'coID=2').'" title="Information">'.MORE_INFO.'</a>');

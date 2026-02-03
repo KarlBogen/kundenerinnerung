@@ -18,6 +18,7 @@ define('CUSTOMERS_REMIND' , 'Produkterinnerung');
 define('NAVBAR_TITLE_CUSTOMERS_REMIND' , 'Produkterinnerung');
 define('CUSTOMERS_REMIND_NOTE' , 'Artikel zur Zeit nicht auf Lager!');
 define('CUSTOMERS_REMIND_LINK_TEXT', 'Benachrichtigung bei Wiederverf&uuml;gbarkeit');
+define('CUSTOMERS_REMIND_EMAIL_1', 'hat sich f&uuml;r diesen Artikel eingetragen:');
 
 define('TEXT_EMAIL_SUBJECT_REMINDER','Ihre Produkterinnerungs-Anmeldung');
 define('TEXT_EMAIL_INPUT_REMINDER','<h1>Bitte beachten!</h1><p>Ihre E-Mail-Adresse wurde in unser System eingetragen.<br><br>Gleichzeitig wurde Ihnen vom System eine E-Mail mit einem Aktivierungslink geschickt.<br><br>Bitte klicken Sie nach dem Erhalt der E-Mail auf den Link, um Ihre Eintragung zu best&auml;tigen.<br>Ansonsten bekommen Sie keine Verf&uuml;gbarkeitsnachricht von uns zugestellt!</p>');

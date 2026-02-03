@@ -18,6 +18,7 @@ define('CUSTOMERS_REMIND' , 'Product Remind');
 define('NAVBAR_TITLE_CUSTOMERS_REMIND' , 'Product Remind');
 define('CUSTOMERS_REMIND_NOTE' , 'Article currently not in stock!');
 define('CUSTOMERS_REMIND_LINK_TEXT', 'Advice of availability');
+define('CUSTOMERS_REMIND_EMAIL_1', 'has registered for this article:');
 
 define('TEXT_EMAIL_SUBJECT_REMINDER','Your products remind subscription');
 define('TEXT_EMAIL_INPUT_REMINDER','<h1>Please note!</h1><p>Your e-mail address has been registered in our system.<br />An e-mail with a confirmation link has been sent out. Click the link to complete registration!</p>');

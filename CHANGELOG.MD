@@ -2,6 +2,10 @@ UNRELEASED
 
 
 
+1.0.7 [03.02.2026]
+
+- Neue Einstellmöglichkeit - E-Mail an den Shopbetreiber senden, wenn sich ein Kunde in die Erinnerungsliste einträgt
+- PHP-Klasse an Shopversion 3.3.0 angeglichen - included functions
 - Mailversand angepasst an Shopversion 3.1.5 (Variable für Priorität)
 
 1.0.6 [30.07.2025]
