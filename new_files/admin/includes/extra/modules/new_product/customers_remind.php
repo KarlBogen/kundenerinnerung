@@ -21,7 +21,7 @@ if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS 
   // berücksichtigt werden nur Kunden deren Mailadresse aktiviert wurde
   $minstockQuery = "SELECT count(cr.customers_st) as count, sum(cr.customers_st) as stock, cr.products_id
                         FROM customers_remind cr
-                        JOIN ".TABLE_CUSTOMERS_REMIND_RECIPIENTS." crr
+                        JOIN " . TABLE_CUSTOMERS_REMIND_RECIPIENTS . " crr
                           ON crr.mail_status = '1'
                           AND crr.customers_email_address = cr.customers_email_address
                         WHERE cr.products_id = " . $pInfo->products_id;
@@ -30,14 +30,17 @@ if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS 
   $minstock = xtc_db_fetch_array($resminstockQuery);
   $sendstock = round((int)$minstock['stock'] * (int)MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK / 100);
 
-  if ($minstock['count'] > 1 && $minstock['stock'] >= $sendstock && $pInfo->products_quantity < $sendstock) {
+  if ($minstock['stock'] >= $sendstock && $pInfo->products_quantity < $sendstock) {
 ?>
-
 
     <table class="tableInput border0">
       <tr>
         <td colspan="2" class="error_message">
-          <span class="c_remind"><u><?php echo BOX_CUSTOMERS_REMIND_SUB1 . ':</u>' . sprintf(CUSTOMERS_REMIND_MINSTOCK_INFO, $minstock['count'], $minstock['stock'], $sendstock); ?></span><br>
+          <?php if ($minstock['count'] > 1) { ?>
+            <span class="c_remind"><u><?php echo BOX_CUSTOMERS_REMIND_SUB1 . ':</u>' . sprintf(CUSTOMERS_REMIND_MINSTOCK_INFO, $minstock['count'], $minstock['stock'], $sendstock); ?></span><br>
+          <?php } else { ?>
+            <span class="c_remind"><u><?php echo BOX_CUSTOMERS_REMIND_SUB1 . ':</u>' . sprintf(CUSTOMERS_REMIND_MINSTOCK_INFO_SINGLE, $minstock['count'], $minstock['stock'], $sendstock); ?></span><br>
+          <?php } ?>
           <span class="pdg2">
             <input type="button" class="sendremindmails button but_red" title="<?php echo CUSTOMERS_REMIND_START_SENDING; ?>" value="<?php echo CUSTOMERS_REMIND_START_SENDING; ?>">
             <a class="button flt-r" style="font-size:10px;" onclick="this.blur();" href="<?php echo xtc_href_link(FILENAME_CUSTOMERS_REMIND); ?>"><?php echo BOX_CUSTOMERS_REMIND_SUB1; ?></a>

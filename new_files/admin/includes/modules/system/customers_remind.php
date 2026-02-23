@@ -37,6 +37,7 @@ class customers_remind
     $this->code = 'customers_remind';
     $this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: ' . $this->version;
     $this->description = '';
+    $this->description .= '<a class="button btnbox" style="text-align:center;" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=edit') . '">' . BUTTON_EDIT . '</a><br />';
     if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && (!defined('MODULE_CUSTOMERS_REMIND_VERSION') || version_compare(MODULE_CUSTOMERS_REMIND_VERSION, $this->version, '<'))) {
       $this->description .= "<script>$('.main').after('" . MODULE_CUSTOMERS_REMIND_VERSION_ERROR . "');</script>";
       $this->description .= '<a class="button btnbox but_green" style="text-align:center;" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=update') . '">Update</a><br /><br />';
