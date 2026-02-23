@@ -2,6 +2,8 @@ UNRELEASED
 
 
 
+- Sprachkonstante "CUSTOMERS_REMIND_MINSTOCK_INFO" geändert
+
 1.0.7 [03.02.2026]
 
 - Neue Einstellmöglichkeit - E-Mail an den Shopbetreiber senden, wenn sich ein Kunde in die Erinnerungsliste einträgt
