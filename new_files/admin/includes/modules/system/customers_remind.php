@@ -33,7 +33,7 @@ class customers_remind
 
   public function __construct()
   {
-    $this->version = '1.0.7';
+    $this->version = '1.0.8';
     $this->code = 'customers_remind';
     $this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: ' . $this->version;
     $this->description = '';

@@ -1,5 +1,11 @@
 UNRELEASED
 
+
+
+
+
+1.0.8 [26.02.2026]
+
 - Button "Bearbeiten" im Systemmodul hinzugefügt
 - Hinweis Erinnerungsliste in Ansicht "Produkt bearbeiten" jetzt auch bei einem Eintrag sichtbar
 - Sprachkonstante "CUSTOMERS_REMIND_MINSTOCK_INFO" geändert
