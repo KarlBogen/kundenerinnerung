@@ -88,7 +88,7 @@ class customers_remind {  //Important same name as filename
 
 	if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS == 'true') {
 
-		if ($array["products_quantity"] < 1){
+		if (isset($array["products_quantity"]) && $array["products_quantity"] < 1){
 
 	        $productData['PRODUCTS_BUTTON_BUY_NOW'] = '';
 

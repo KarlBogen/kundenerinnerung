@@ -3,6 +3,7 @@ UNRELEASED
 
 
 
+- Undefined array key "products_quantity" in includes/modules/product/customers_remind.php - behoben
 
 1.0.8 [26.02.2026]
 

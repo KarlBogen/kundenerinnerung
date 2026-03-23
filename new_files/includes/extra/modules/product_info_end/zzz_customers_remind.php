@@ -17,7 +17,7 @@
 if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS == 'true') {
 	// prüft, ob Bestand kleiner 1 - wenn ja, dann Button hinzufügen
 
-	if ($product->data['products_quantity'] < 1) {
+	if (isset($product->data['products_quantity']) && $product->data['products_quantity'] < 1) {
 
 		global $request_type;
 
