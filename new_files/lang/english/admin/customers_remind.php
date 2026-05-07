@@ -39,3 +39,4 @@ define('BUTTON_SEND_RABATT', 'Send discount');
 defined('TEXT_SORT_ASC') or define('TEXT_SORT_ASC','ascending');
 defined('TEXT_SORT_DESC') or define('TEXT_SORT_DESC','descending');
 defined('TEXT_IMAGE_NONEXISTENT') or define('TEXT_IMAGE_NONEXISTENT', 'Image does not exist');
+define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_REMINDS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b>)');

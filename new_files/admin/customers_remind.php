@@ -16,6 +16,11 @@
 
 require('includes/application_top.php');
 
+//display per page
+$cfg_max_display_results_key = 'MAX_DISPLAY_NEWSLETTER_RECIPIENTS_RESULTS';
+$page_max_display_results = xtc_cfg_save_max_display_results($cfg_max_display_results_key);
+$page = (isset($_GET['page']) ? (int)$_GET['page'] : 1);
+
 if (isset($_POST['del_user'])) {
   $usid = $_POST['del_user'];
   xtc_db_query("DELETE FROM customers_remind WHERE remind_id ='" . $usid . "';");
@@ -135,6 +140,7 @@ require(DIR_WS_INCLUDES . 'head.php');
                                   JOIN " . TABLE_PRODUCTS . " p
                                     WHERE p.products_id = cr.products_id " . $sort;
 
+                $reminder_split = new splitPageResults($page, $page_max_display_results, $remindsQuery, $remindsQuery_numrows);
                 $customers_remind_query = xtc_db_query($remindsQuery);
                 while ($result = xtc_db_fetch_array($customers_remind_query)) {
                   $customers_reminds[] = $result;
@@ -149,7 +155,7 @@ require(DIR_WS_INCLUDES . 'head.php');
                 foreach ($customers_reminds as $customers_remind) {
                   // Mindestlagerbestand für automatischen Mailversand
                   if (isset($totals[$customers_remind['products_id']]['STOCK']))
-                  $sendstock = round((int)$totals[$customers_remind['products_id']]['STOCK'] * (int)MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK / 100);
+                    $sendstock = round((int)$totals[$customers_remind['products_id']]['STOCK'] * (int)MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK / 100);
 
                   if ((isset($pInfo)) && (is_object($pInfo)) && ($customers_remind['remind_id'] == $pInfo->remind_id)) {
                     echo '<tr class="dataTableRowSelected" onmouseover="this.style.cursor=\'hand\'" >' . "\n";
@@ -226,6 +232,7 @@ require(DIR_WS_INCLUDES . 'head.php');
                 }
         ?>
         </table>
+
         <table>
           <tr>
             <td class="smallText txta-l"><?php echo KD_REG; ?></td>
@@ -237,6 +244,12 @@ require(DIR_WS_INCLUDES . 'head.php');
             <td class="smallText txta-l"><?php echo FOOTER_INFO; ?></td>
           </tr>
         </table>
+
+        <div class="clear"></div>
+        <div class="smallText pdg2 flt-l"><?php echo $reminder_split->display_count($remindsQuery_numrows, $page_max_display_results, $page, TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_REMINDS); ?></div>
+        <div class="smallText pdg2 flt-r"><?php echo $reminder_split->display_links($remindsQuery_numrows, $page_max_display_results, MAX_DISPLAY_PAGE_LINKS, $page, xtc_get_all_get_params(array('page'))); ?></div>
+        <?php echo draw_input_per_page($PHP_SELF, $cfg_max_display_results_key, $page_max_display_results); ?>
+
       </td>
     </tr>
   </table>

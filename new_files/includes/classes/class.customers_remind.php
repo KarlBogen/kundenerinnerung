@@ -64,8 +64,6 @@ class customersremind {
         $sql_data_array = array (
           'mail_status' => '2',
           'mail_key' => '',
-          'date_added' => '',
-          'ip_date_added' => '',
           'date_confirmed' => '',
           'ip_date_confirmed' => '',
         );

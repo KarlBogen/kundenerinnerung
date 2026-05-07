@@ -1,8 +1,9 @@
 UNRELEASED
 
 
-
-
+- in der Erinnerungsliste wird die Anzahl der Einträge gesplittet
+- in der Empfängerliste wird die Anzahl der aktuellen Erinnerungen angezeigt
+- neue Funktion - ältere nicht aktivierte E-Mail-Adressen können einfacher entfernt und die Erinnerungsliste aktualisiert werden
 - Undefined array key "products_quantity" in includes/modules/product/customers_remind.php - behoben
 
 1.0.8 [26.02.2026]

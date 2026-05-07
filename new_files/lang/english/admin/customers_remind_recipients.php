@@ -14,34 +14,43 @@
 	Released under the GNU General Public License
 -------------------------------------------------------------- */
 
-  define('HEADING_TITLE', 'Customers remind recipient');
+define('HEADING_TITLE', 'Customers remind recipient');
 
-  define('TABLE_HEADING_EMAIL', 'E-Mail Address');
-  define('TABLE_HEADING_FIRSTNAME', 'Firstname');
-  define('TABLE_HEADING_LASTNAME', 'Lastname');
-  define('TABLE_HEADING_CUSTOMERS_STATUS', 'Customers status');
-  define('TABLE_HEADING_STATUS', 'Status');
-  define('TABLE_HEADING_ACTION', 'Action');
-  define('TABLE_HEADING_DATE_ADDED', 'Added');
+define('TABLE_HEADING_EMAIL', 'E-Mail Address');
+define('TABLE_HEADING_FIRSTNAME', 'Firstname');
+define('TABLE_HEADING_LASTNAME', 'Lastname');
+define('TABLE_HEADING_CUSTOMERS_STATUS', 'Customers status');
+define('TABLE_HEADING_STATUS', 'Status');
+define('TABLE_HEADING_ACTION', 'Action');
+define('TABLE_HEADING_DATE_ADDED', 'Added');
 
-  define('ENTRY_MAIL_STATUS', 'Status:');
-  define('ENTRY_SEARCH_CUSTOMER', 'Search:');
-  
-  define('TXT_SUBSCRIBED', 'subscribed');
-  define('TXT_UNSUBSCRIBED', 'unsubscribed');
-  define('TXT_UNCONFIRMED', 'unconfirmed');
+define('ENTRY_MAIL_STATUS', 'Status:');
+define('ENTRY_SEARCH_CUSTOMER', 'Search:');
 
-  define('TEXT_INFO_HISTORY_CUSTOMER', 'History:');
-  define('TEXT_INFO_HISTORY_CUSTOMER_NONE', 'no history available');
-  define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'E-Mail Address unsubscribe');
-  define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to unsubscribe this e-mail address?');
+define('TXT_SUBSCRIBED', 'subscribed');
+define('TXT_UNSUBSCRIBED', 'unsubscribed');
+define('TXT_UNCONFIRMED', 'unconfirmed');
 
-  define('BUTTON_UNSUBSCRIBE', 'E-Mail unsubscribe');
-  define('BUTTON_REMIND', 'E-Mail opt-in');
+define('TEXT_INFO_HISTORY_CUSTOMER', 'History:');
+define('TEXT_INFO_HISTORY_CUSTOMER_NONE', 'no history available');
+define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'E-Mail Address unsubscribe');
+define('TEXT_INFO_DELETE_INTRO', 'Are you sure you want to unsubscribe this e-mail address?');
 
-  define('TEXT_EMAIL_SUBJECT_REMINDER','Your customers remind subscription');
-  define('TEXT_EMAIL_DEL_REMINDER','E-Mail address was deleted successfully from customers remind database.');
-  define('TEXT_EMAIL_DEL_ERROR','An Error occured, E-Mail address has not been removed from database!');
-  define('TEXT_EMAIL_EXIST_NO_REMINDER', 'Opt-in E-Mail sent.');
+define('BUTTON_UNSUBSCRIBE', 'E-Mail unsubscribe');
+define('BUTTON_REMIND', 'E-Mail opt-in');
 
+define('TEXT_EMAIL_SUBJECT_REMINDER', 'Your customers remind subscription');
+define('TEXT_EMAIL_DEL_REMINDER', 'E-Mail address was deleted successfully from customers remind database.');
+define('TEXT_EMAIL_DEL_ERROR', 'An Error occured, E-Mail address has not been removed from database!');
+define('TEXT_EMAIL_EXIST_NO_REMINDER', 'Opt-in E-Mail sent.');
+
+define('FOOTER_INFO', 'E-Mail Address<span class="colorRed"> (Number of current remind entrys)</span>');
 define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_REMIND_RECIPIENTS', 'Displaying <b>%d</b> to <b>%d</b> (of <b>%d</b> registered recipients)');
+
+define('DELETE_INACTIVE_RECIPIENTS_TITLE', 'Unsubscribe inactive email addresses and update reminder list');
+define('DELETE_INACTIVE_RECIPIENTS_INFO', 'Inactive email addresses can be unsubscribed and removed from the reminder list, depending on the registration date!<br>
+    Recipients whose registration is older than the specified number of days will be processed!');
+define('DELETE_INACTIVE_RECIPIENTS_TEXT_DAYS', ' Days');
+define('DELETE_INACTIVE_RECIPIENTS_SELECT_LABEL', 'Registrations older than: ');
+define('DELETE_INACTIVE_RECIPIENTS_BUTTONTEXT', 'Search emails');
+define('DELETE_INACTIVE_RECIPIENTS_NO_ENTRYS_FOUND', 'No "unactivated receivers" older than <b>%s</b> days were found!');

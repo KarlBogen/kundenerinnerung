@@ -14,34 +14,43 @@
 	Released under the GNU General Public License
 -------------------------------------------------------------- */
 
-  define('HEADING_TITLE', 'Kundenerinnerungen Empf&auml;nger');
+define('HEADING_TITLE', 'Kundenerinnerungen Empf&auml;nger');
 
-  define('TABLE_HEADING_EMAIL', 'E-Mail Adresse');
-  define('TABLE_HEADING_FIRSTNAME', 'Vorname');
-  define('TABLE_HEADING_LASTNAME', 'Nachname');
-  define('TABLE_HEADING_CUSTOMERS_STATUS', 'Kundengruppe');
-  define('TABLE_HEADING_STATUS', 'Status');
-  define('TABLE_HEADING_ACTION', 'Aktion');
-  define('TABLE_HEADING_DATE_ADDED', 'Hinzugef&uuml;gt');
-  
-  define('ENTRY_MAIL_STATUS', 'Status:');
-  define('ENTRY_SEARCH_CUSTOMER', 'Suche:');
+define('TABLE_HEADING_EMAIL', 'E-Mail Adresse');
+define('TABLE_HEADING_FIRSTNAME', 'Vorname');
+define('TABLE_HEADING_LASTNAME', 'Nachname');
+define('TABLE_HEADING_CUSTOMERS_STATUS', 'Kundengruppe');
+define('TABLE_HEADING_STATUS', 'Status');
+define('TABLE_HEADING_ACTION', 'Aktion');
+define('TABLE_HEADING_DATE_ADDED', 'Hinzugef&uuml;gt');
 
-  define('TXT_SUBSCRIBED', 'abonniert');
-  define('TXT_UNSUBSCRIBED', 'abgemeldet');
-  define('TXT_UNCONFIRMED', 'unbest&auml;tigt');
+define('ENTRY_MAIL_STATUS', 'Status:');
+define('ENTRY_SEARCH_CUSTOMER', 'Suche:');
 
-  define('TEXT_INFO_HISTORY_CUSTOMER', 'Historie:');
-  define('TEXT_INFO_HISTORY_CUSTOMER_NONE', 'keine Historie verf&uuml;gbar');
-  define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'E-Mail Adresse abmelden');
-  define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie diese E-Mail Adresse von der Kundenerinnerung abmelden m&ouml;chten?');
+define('TXT_SUBSCRIBED', 'abonniert');
+define('TXT_UNSUBSCRIBED', 'abgemeldet');
+define('TXT_UNCONFIRMED', 'unbest&auml;tigt');
 
-  define('BUTTON_UNSUBSCRIBE', 'E-Mail abmelden');
-  define('BUTTON_REMIND', 'E-Mail opt-in');
+define('TEXT_INFO_HISTORY_CUSTOMER', 'Historie:');
+define('TEXT_INFO_HISTORY_CUSTOMER_NONE', 'keine Historie verf&uuml;gbar');
+define('TEXT_INFO_HEADING_DELETE_CUSTOMER', 'E-Mail Adresse abmelden');
+define('TEXT_INFO_DELETE_INTRO', 'Sind Sie sicher, dass Sie diese E-Mail Adresse von der Kundenerinnerung abmelden m&ouml;chten?');
 
-  define('TEXT_EMAIL_SUBJECT_REMINDER','Ihre Kundenerinnerungs-Anmeldung');
-  define('TEXT_EMAIL_DEL_REMINDER','Die E-Mail-Adresse wurde aus der Kundenerinnerungsdatenbank gel&ouml;scht.');
-  define('TEXT_EMAIL_DEL_ERROR','Es ist ein Fehler aufgetreten, die E-Mail-Adresse wurde nicht gel&ouml;scht!');
-  define('TEXT_EMAIL_EXIST_NO_REMINDER', 'Die Opt-in E-Mail wurde erneut versendet.');
+define('BUTTON_UNSUBSCRIBE', 'E-Mail abmelden');
+define('BUTTON_REMIND', 'E-Mail opt-in');
 
+define('TEXT_EMAIL_SUBJECT_REMINDER', 'Ihre Kundenerinnerungs-Anmeldung');
+define('TEXT_EMAIL_DEL_REMINDER', 'Die E-Mail-Adresse wurde aus der Kundenerinnerungsdatenbank gel&ouml;scht.');
+define('TEXT_EMAIL_DEL_ERROR', 'Es ist ein Fehler aufgetreten, die E-Mail-Adresse wurde nicht gel&ouml;scht!');
+define('TEXT_EMAIL_EXIST_NO_REMINDER', 'Die Opt-in E-Mail wurde erneut versendet.');
+
+define('FOOTER_INFO', 'E-Mail Adresse<span class="colorRed"> (Anzahl der aktuellen Erinnerungen)</span>');
 define('TEXT_DISPLAY_NUMBER_OF_CUSTOMERS_REMIND_RECIPIENTS', 'Angezeigt werden <b>%d</b> bis <b>%d</b> (von insgesamt <b>%d</b> Registrierten Empf&auml;ngern)');
+
+define('DELETE_INACTIVE_RECIPIENTS_TITLE', 'Nicht aktivierte E-Mail Adressen abmelden und Erinnerungsliste aktualisieren');
+define('DELETE_INACTIVE_RECIPIENTS_INFO', 'Nicht aktivierte E-Mail Adressen k&ouml;nnen abh&auml;ngig vom Anmeldedatum abgemeldet und aus der Erinnerungsliste entfernt werden!<br>
+    Empf&auml;nger deren Anmeldung &auml;lter als die eingestellten Tage sind werden verarbeitet!');
+define('DELETE_INACTIVE_RECIPIENTS_TEXT_DAYS', ' Tage');
+define('DELETE_INACTIVE_RECIPIENTS_SELECT_LABEL', 'Anmeldungen &auml;lter als: ');
+define('DELETE_INACTIVE_RECIPIENTS_BUTTONTEXT', 'E-Mails suchen');
+define('DELETE_INACTIVE_RECIPIENTS_NO_ENTRYS_FOUND', 'Es sind keine "nicht aktivierten Empf&auml;nger" &auml;lter als <b>%s</b> Tage zu finden!');
