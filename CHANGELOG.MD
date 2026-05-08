@@ -1,6 +1,9 @@
 UNRELEASED
 
 
+
+1.0.9 [08.05.2026]
+
 - in der Erinnerungsliste wird die Anzahl der Einträge gesplittet
 - in der Empfängerliste wird die Anzahl der aktuellen Erinnerungen angezeigt
 - neue Funktion - ältere nicht aktivierte E-Mail-Adressen können einfacher entfernt und die Erinnerungsliste aktualisiert werden
