@@ -22,7 +22,7 @@ $page_max_display_results = xtc_cfg_save_max_display_results($cfg_max_display_re
 $page = (isset($_GET['page']) ? (int)$_GET['page'] : 1);
 
 if (isset($_POST['del_user'])) {
-  $usid = $_POST['del_user'];
+  $usid = (int)$_POST['del_user'];
   xtc_db_query("DELETE FROM customers_remind WHERE remind_id ='" . $usid . "';");
 }
 

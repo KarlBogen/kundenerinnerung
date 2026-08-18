@@ -17,15 +17,18 @@
 function cron_send_customers_remind()
 {
 
-  if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS == 'true' &&
-      defined('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP') && MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP != 'true'
-      )
- {
+  if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS == 'true') {
     // include needed functions
-    require_once (DIR_FS_INC.'xtc_date_short.inc.php');
+    require_once(DIR_FS_INC . 'xtc_date_short.inc.php');
 
     include_once(DIR_WS_INCLUDES . 'modules/customers_remind.php');
-    sendremindmails();
+
+    if (defined('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP') && MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP != 'true') {
+      sendremindmails();
+    }
+    if (defined('MODULE_CUSTOMERS_REMIND_ACTIVATION_REMIND') && MODULE_CUSTOMERS_REMIND_ACTIVATION_REMIND != '0') {
+      sendactivationremindmails();
+    }
   }
   return true;
 }

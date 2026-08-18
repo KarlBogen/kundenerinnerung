@@ -2,6 +2,11 @@ UNRELEASED
 
 
 
+1.0.10 [18.08.2026]
+
+- Kundenerinnerung - neue Funktion - Aktivierungsmail an "nicht aktivierte" Kunden erneut senden
+- Kundenerinnerung - Variablen falsch benannt, dadurch fehlen Einträge in der Erinnerungsliste - behoben
+
 1.0.9 [08.05.2026]
 
 - in der Erinnerungsliste wird die Anzahl der Einträge gesplittet

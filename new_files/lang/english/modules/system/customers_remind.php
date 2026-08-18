@@ -25,7 +25,21 @@ define('MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED_DESC', 'If you only allow this s
 define('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED_TITLE', 'Signing privacy notice also for registered customers?');
 define('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED_DESC', 'Should the privacy notice checkbox also be required for registered customers, set this switch to "Yes".<br>(Only applies if Adv. Configuration -> Additional Modules - Sign privacy notice = "Yes"!)');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_TITLE', 'Send email immediately?');
-define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_DESC', 'Compare the "Customer Reminder" table with the "Stock" and then <strong>send the emails according to the settings in <a style="color: #e67e22; font-size: 12px; font-weight: bold;" href="'.((function_exists('xtc_href_link')) ? xtc_href_link(FILENAME_SCHEDULED_TASKS) : '#').'">Tools -> Scheduled Tasks</a> -> Task: "Customer reminder for sold-out products"</strong>, then switch to "No" (recommended setting).<br>If you want to compare the "Customer Reminder" table with the "Stock" at every page load, set this switch to "Yes".');
+define('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP_DESC', 'To compare the "Customer Reminder" table with the "Stock" and then send the emails we use<br>
+	<a style="color: #e67e22; font-size: 12px; font-weight: bold;" href="'.((function_exists('xtc_href_link')) ? xtc_href_link(FILENAME_SCHEDULED_TASKS) : '#').'">Tools -> Scheduled Tasks</a><strong> -> Task: "Customer reminder for sold-out products"</strong><br>
+  This scheduled task must be enabled.<br>
+  <u>Settings:</u><br>
+	Automatic sending = switch set to "No" (recommended setting).<br>
+	If you want to compare the "Customer Reminder" table with the "Stock" at every page load = set this switch to "Yes".');
+define('MODULE_CUSTOMERS_REMIND_ACTIVATION_REMIND_TITLE', 'Resend activation email to "not activated" customers');
+define('MODULE_CUSTOMERS_REMIND_ACTIVATION_REMIND_DESC', 'For automated email sending we use<br>
+	<a style="color: #e67e22; font-size: 12px; font-weight: bold;" href="'.((function_exists('xtc_href_link')) ? xtc_href_link(FILENAME_SCHEDULED_TASKS) : '#').'">Tools -> Scheduled Tasks</a><strong> -> Task: "Customer reminder for sold-out products"</strong><br>
+  This scheduled task must be enabled.<br>
+  <u>Settings:</u><br>
+  Here you can set after how many days "not activated" customers receive another activation email.<br>
+  "0" = no further activation email will be sent.<br>
+  "7" = An <b>first activation reminder</b> is sent if the registration was more than 7 days ago.<br>
+  After double the number of days (in this case, 2 x 7 is 14 days), a <b>second activation reminder</b> is sent.');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_TITLE', 'Customer remind:');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_DESC', 'Send an e-mail to the shop owner (contact - e-mail address) when a customer enters the reminder list?');
 define('MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK_STATUS_TITLE', 'Send message when minimum stock level is reached.');

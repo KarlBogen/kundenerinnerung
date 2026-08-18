@@ -33,13 +33,13 @@ class customers_remind
 
   public function __construct()
   {
-    $this->version = '1.0.9';
+    $this->version = '1.0.10';
     $this->code = 'customers_remind';
     $this->title = MODULE_CUSTOMERS_REMIND_TEXT_TITLE . ' © by <a href="https://github.com/KarlBogen" target="_blank" style="color: #e67e22; font-weight: bold;">Karl</a> - Version: ' . $this->version;
     $this->description = '';
     $this->description .= '<a class="button btnbox" style="text-align:center;" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=edit') . '">' . BUTTON_EDIT . '</a><br />';
     if (defined('MODULE_CUSTOMERS_REMIND_STATUS') && (!defined('MODULE_CUSTOMERS_REMIND_VERSION') || version_compare(MODULE_CUSTOMERS_REMIND_VERSION, $this->version, '<'))) {
-      $this->description .= "<script>$('.main').after('" . MODULE_CUSTOMERS_REMIND_VERSION_ERROR . "');</script>";
+      $this->description .= "<script>$('.boxCenter').children('.error_message').css('display', 'none' ); $('.main').after('" . MODULE_CUSTOMERS_REMIND_VERSION_ERROR . "');</script>";
       $this->description .= '<a class="button btnbox but_green" style="text-align:center;" onclick="this.blur();" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=update') . '">Update</a><br /><br />';
     }
     $this->description .= '<a class="button btnbox but_red" style="text-align:center;" onclick="return confirmLink(\'' . MODULE_CUSTOMERS_REMIND_DELETE_CONFIRM . '\', \'\' ,this);" href="' . xtc_href_link(FILENAME_MODULE_EXPORT, 'set=system&module=' . $this->code . '&action=custom') . '">' . MODULE_CUSTOMERS_REMIND_DELETE_BUTTON . '</a><br />';
@@ -79,6 +79,7 @@ class customers_remind
     xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED', 'false',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED', 'true',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP', 'false',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
+    xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_ACTIVATION_REMIND', '7',  '6', '1', 'xtc_cfg_select_option(array(\'0\', \'7\', \'14\', \'21\'), ', now())");
     xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_SENDMAIL', 'false',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK_STATUS', 'true',  '6', '1', 'xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK', '80',  '6', '1', 'xtc_cfg_select_option(array(\'40\', \'50\', \'60\', \'70\', \'80\', \'90\', \'100\', \'110\', \'120\', \'130\', \'140\', \'150\', \'160\'), ', now())");
@@ -119,6 +120,7 @@ class customers_remind
       ip_date_added varchar(50) DEFAULT NULL,
       date_confirmed datetime DEFAULT NULL,
       ip_date_confirmed varchar(50) DEFAULT NULL,
+      act_remind int(1) NOT NULL DEFAULT 0,
       PRIMARY KEY (mail_id)
     )");
 
@@ -174,6 +176,9 @@ class customers_remind
     if (!defined('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP')) {
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP', 'false','6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     }
+    if (!defined('MODULE_CUSTOMERS_REMIND_ACTIVATION_REMIND')) {
+      xtc_db_query("INSERT INTO " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) VALUES ('MODULE_CUSTOMERS_REMIND_ACTIVATION_REMIND', '7',  '6', '1', 'xtc_cfg_select_option(array(\'0\', \'7\', \'14\', \'21\'), ', now())");
+    }
     if (!defined('MODULE_CUSTOMERS_REMIND_SENDMAIL')) {
       xtc_db_query("insert into " . TABLE_CONFIGURATION . " (configuration_key, configuration_value, configuration_group_id, sort_order, set_function, date_added) values ('MODULE_CUSTOMERS_REMIND_SENDMAIL', 'false','6', '1','xtc_cfg_select_option(array(\'true\', \'false\'), ', now())");
     }
@@ -207,6 +212,11 @@ class customers_remind
         xtc_db_query("DROP TABLE " . TABLE_SIMULATED_CRON_RECORDS);
       }
     }
+    // Spalte für Aktivierungserinnerung hinzufügen
+    $column_exists = xtc_db_num_rows(xtc_db_query("SHOW COLUMNS FROM " . TABLE_CUSTOMERS_REMIND_RECIPIENTS . " WHERE Field='act_remind'"));
+    if (!$column_exists) {
+      xtc_db_query("ALTER TABLE " . TABLE_CUSTOMERS_REMIND_RECIPIENTS . " ADD `act_remind` int(1) NOT NULL DEFAULT 0");
+    }
   }
 
   public function remove()
@@ -231,6 +241,9 @@ class customers_remind
     if ($exist > 0) {
       xtc_db_query("ALTER TABLE " . TABLE_ADMIN_ACCESS . " DROP `customers_remind_recipients`");
     }
+
+    //Eintrag in Tabelle geplante Aufgaben
+    xtc_db_query("DELETE FROM " . TABLE_SCHEDULED_TASKS . " WHERE tasks = 'send_customers_remind'");
 
     // Klassenerweiterungsmodul wird zeitgleich deinstalliert
     xtc_db_query("DELETE FROM " . TABLE_CONFIGURATION . " WHERE configuration_key LIKE 'MODULE_PRODUCT_CUSTOMERS_REMIND_%'");
@@ -352,6 +365,7 @@ class customers_remind
       'MODULE_CUSTOMERS_REMIND_ONLY_REGISTERED',
       'MODULE_CUSTOMERS_REMIND_PRIVACY_CHECK_REGISTERED',
       'MODULE_CUSTOMERS_REMIND_SENDMAIL_ASAP',
+      'MODULE_CUSTOMERS_REMIND_ACTIVATION_REMIND',
       'MODULE_CUSTOMERS_REMIND_SENDMAIL',
       'MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK_STATUS',
       'MODULE_CUSTOMERS_REMIND_SENDMAIL_MINSTOCK',
