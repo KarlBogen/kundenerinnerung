@@ -191,10 +191,11 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 	        $smarty->assign('SUCCESS_MESSAGE', '2');
 
           if (defined('MODULE_CUSTOMERS_REMIND_SENDMAIL') && MODULE_CUSTOMERS_REMIND_SENDMAIL == 'true') {
+						$customers_input_name = $customers_input_firstname . "  " . $customers_input_lastname;
 
 						$create_html_body = '<h3>' . STORE_NAME . '</h3>';
 						$create_html_body .= '<h4>' . CUSTOMERS_REMIND . '</h4>';
-						$create_html_body .= $customers_input_firstname . "  " . $customers_input_lastname;
+						$create_html_body .= encode_htmlspecialchars($customers_input_name, ENT_NOQUOTES);
 						if (isset($_SESSION['customer_id'])) $create_html_body .= " [" . $_SESSION['customer_id'] . "]";
 						$create_html_body .= "<br>" . CUSTOMERS_REMIND_EMAIL_1 . "<br><br>";
 						$create_html_body .= HEADER_ARTICLE . ": " . $product->data['products_name'] . "<br>";
@@ -203,7 +204,7 @@ if(defined('MODULE_CUSTOMERS_REMIND_STATUS') && MODULE_CUSTOMERS_REMIND_STATUS =
 
 						$create_text_body = STORE_NAME . "\n\n";
 						$create_text_body .= CUSTOMERS_REMIND . ":\n--------------------\n";
-						$create_text_body .= $customers_input_firstname . "  " . $customers_input_lastname;
+						$create_text_body .= encode_htmlspecialchars($customers_input_name, ENT_NOQUOTES);
 						if (isset($_SESSION['customer_id'])) $create_html_body .= " [" . $_SESSION['customer_id'] . "]";
 						$create_text_body .= "\n" . CUSTOMERS_REMIND_EMAIL_1 . "\n\n";
 						$create_text_body .= HEADER_ARTICLE . ": " . $product->data['products_name'] . "\n";

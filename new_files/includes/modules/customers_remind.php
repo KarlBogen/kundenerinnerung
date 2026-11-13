@@ -71,8 +71,8 @@ function sendremindmails($prodId = '', $mail = '')
       $objSmarty->assign('PRODUCTS_NAME', $arrstock['products_name']);
       $objSmarty->assign('PRODUCTS_MODEL', $arrstock['products_model']);
       $objSmarty->assign('CUSTOMERS_GENDER', $arrstock['customers_gender']);
-      $objSmarty->assign('CUSTOMERS_FIRSTNAME', $arrstock['customers_firstname']);
-      $objSmarty->assign('CUSTOMERS_LASTNAME', $arrstock['customers_lastname']);
+      $objSmarty->assign('CUSTOMERS_FIRSTNAME', encode_htmlspecialchars($arrstock['customers_firstname'], ENT_NOQUOTES));
+      $objSmarty->assign('CUSTOMERS_LASTNAME', encode_htmlspecialchars($arrstock['customers_lastname'], ENT_NOQUOTES));
       $objSmarty->assign('MAIL_HEAD1', $arrstock['mail_head1']);
       $objSmarty->assign('CUSTOMERS_LANGUAGE', $arrstock['customers_language']);
       $objSmarty->assign('CUSTOMERS_PRODUCTS_IMAGE', $arrstock['products_image']);

@@ -2,6 +2,8 @@ UNRELEASED
 
 
 
+- Kundendaten decodiert ausgeben
+
 1.0.10 [18.08.2026]
 
 - Kundenerinnerung - neue Funktion - Aktivierungsmail an "nicht aktivierte" Kunden erneut senden
